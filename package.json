@@ -1,0 +1,19 @@
+{
+  "name": "pinterest-clone",
+  "version": "1.0.0",
+  "description": "Pinterest clone built with NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SavaVuckovic/Pinterest-Clone.git"
+  },
+  "author": "Sava Vuckovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SavaVuckovic/Pinterest-Clone/issues"
+  },
+  "homepage": "https://github.com/SavaVuckovic/Pinterest-Clone#readme"
+}
