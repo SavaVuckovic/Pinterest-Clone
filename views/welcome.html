@@ -1,0 +1,39 @@
+{% extends 'layouts/master.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  Welcome
+</div>
+
+<!-- Login Modal -->
+<div class="login-modal">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="login-modal-content col-md-6">
+
+        <div class="login-modal-header">
+          <h2>Login</h2>
+          <span class="modal-close">&times;</span>
+        </div>
+        <hr>
+        <div class="login-modal-body">
+          <form class="login-form">
+            <input type="text" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Login</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal Script -->
+<script src="/js/loginmodal.js"></script>
+
+{% endblock %}

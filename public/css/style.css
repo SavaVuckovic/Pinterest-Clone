@@ -1,8 +1,8 @@
-html,
-body {
+* {
   margin: 0;
   padding: 0;
   font-family: 'Droid Sans', sans-serif;
+  color: #222;
 }
 
 .clearfix {
@@ -13,6 +13,10 @@ body {
 .navbar {
   padding: 10px;
   box-shadow: 0 0 5px #bbb;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 3;
 }
 
 .navbar ul {
@@ -39,4 +43,80 @@ body {
   font-weight: bold;
   text-decoration: none;
   font-size: 18px;
+}
+
+/* login modal */
+.login-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.login-modal-content {
+  background: #fff;
+  margin-top: 200px;
+}
+
+.login-modal-header {
+  padding: 10px 0;
+}
+
+.login-modal-header h2 {
+  color: #0287c8;
+  display: inline-block;
+}
+
+.modal-close {
+  float: right;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.modal-close:hover {
+  color: #ad0909;
+  font-size: 24px;
+}
+
+.login-modal-body {
+  padding: 10px;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #888;
+  border-radius: 20px;
+}
+
+.login-form input:focus {
+  outline: none;
+  border: 1px solid #0287c8;
+  box-shadow: 0 0 3px #0287c8;
+}
+
+.login-form button {
+  padding: 7px;
+  border: 2px solid #0287c8;
+  border-radius: 20px;
+  width: 100px;
+  color: #0287c8;
+  background: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.login-form button:hover {
+  color: #fff;
+  background: #0287c8;
 }
