@@ -46,6 +46,7 @@
 }
 
 /* login modal */
+.register-modal,
 .login-modal {
   position: fixed;
   z-index: 1;
@@ -58,40 +59,55 @@
   display: none;
 }
 
-.login-modal-content {
+.login-modal-content,
+.register-modal-content {
   background: #fff;
   margin-top: 200px;
+  animation-name: modalopen;
+  animation-duration: 0.7s;
 }
 
-.login-modal-header {
+@keyframes modalopen{
+  from{ opacity: 0}
+  to {opacity: 1}
+}
+
+.login-modal-header,
+.register-modal-header {
   padding: 10px 0;
 }
 
-.login-modal-header h2 {
+.login-modal-header h2,
+.register-modal-header h2 {
   color: #0287c8;
   display: inline-block;
 }
 
-.modal-close {
+.modal-close-login,
+.modal-close-register {
   float: right;
   font-weight: bold;
   font-size: 20px;
 }
 
-.modal-close:hover {
+.modal-close-login:hover,
+.modal-close-register:hover {
   color: #ad0909;
   font-size: 24px;
 }
 
-.login-modal-body {
+.login-modal-body,
+.register-modal-body {
   padding: 10px;
 }
 
-.login-form {
+.login-form,
+.register-form {
   text-align: center;
 }
 
-.login-form input {
+.login-form input,
+.register-form input {
   width: 100%;
   padding: 10px;
   margin-bottom: 8px;
@@ -99,13 +115,15 @@
   border-radius: 20px;
 }
 
-.login-form input:focus {
+.login-form input:focus,
+.register-form input:focus {
   outline: none;
   border: 1px solid #0287c8;
   box-shadow: 0 0 3px #0287c8;
 }
 
-.login-form button {
+.login-form button,
+.register-form button {
   padding: 7px;
   border: 2px solid #0287c8;
   border-radius: 20px;
@@ -116,7 +134,8 @@
   font-size: 16px;
 }
 
-.login-form button:hover {
+.login-form button:hover,
+.register-form button:hover {
   color: #fff;
   background: #0287c8;
 }

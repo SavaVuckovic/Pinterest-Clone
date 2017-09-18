@@ -1,9 +1,14 @@
 const express = require('express');
 const path = require('path');
 const nunjucks = require('nunjucks');
+const bodyParser = require('body-parser');
+require('dotenv').config();
 
 // initialize the express application
 const app = express();
+
+// require routes
+const authRoutes = require('./routes/auth');
 
 // view engine setup
 app.set('view engine', 'html');
@@ -15,7 +20,13 @@ nunjucks.configure(path.join(__dirname, 'views'), {
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // routes
+app.use('/auth', authRoutes);
+
 app.get('/', (req, res) => {
 	res.render('welcome', {
     title: 'Welcome'

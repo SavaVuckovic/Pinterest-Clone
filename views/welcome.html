@@ -17,12 +17,12 @@
 
         <div class="login-modal-header">
           <h2>Login</h2>
-          <span class="modal-close">&times;</span>
+          <span class="modal-close-login">&times;</span>
         </div>
         <hr>
         <div class="login-modal-body">
-          <form class="login-form">
-            <input type="text" name="email" placeholder="Email">
+          <form class="login-form" method="post" action="/auth/login">
+            <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
             <button type="submit">Login</button>
           </form>
@@ -33,7 +33,33 @@
   </div>
 </div>
 
+<!-- Register Modal -->
+<div class="register-modal">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="register-modal-content col-md-6">
+
+        <div class="register-modal-header">
+          <h2>Register</h2>
+          <span class="modal-close-register">&times;</span>
+        </div>
+        <hr>
+        <div class="register-modal-body">
+          <form class="register-form" method="post" action="/auth/register">
+            <input type="text" name="username" placeholder="Username">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password2" placeholder="Confirm Password">
+            <button type="submit">Register</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Login Modal Script -->
-<script src="/js/loginmodal.js"></script>
+<script src="/js/auth_modals.js"></script>
 
 {% endblock %}
