@@ -2,9 +2,10 @@
   "name": "pinterest-clone",
   "version": "1.0.0",
   "description": "Pinterest clone built with NodeJS",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/SavaVuckovic/Pinterest-Clone/issues"
   },
-  "homepage": "https://github.com/SavaVuckovic/Pinterest-Clone#readme"
+  "homepage": "https://github.com/SavaVuckovic/Pinterest-Clone#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongoose": "^4.11.11",
+    "nunjucks": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
 }
