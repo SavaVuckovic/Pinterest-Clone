@@ -5,6 +5,7 @@ const { matchedData } = require('express-validator/filter');
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const passport = require('passport');
 
 /* Register */
 router.post('/register', [
@@ -35,17 +36,35 @@ router.post('/register', [
         let sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
         db.query(sql, [username, email, passwordHash], (err, result, fields) => {
           if(err) throw err;
-          res.render('welcome', {
-            title: 'Registration successful'
+          // log the user in by passing his id to passport
+          db.query('SELECT LAST_INSERT_ID() AS user_id', (err, result, fields) => {
+            console.log('result: ' + result[0]);
+            if(err) throw err;
+            const user_id = result[0];
+            req.login(user_id, (err) => {
+              if(err) throw err;
+              res.redirect('/dashboard');
+            });
           });
         });
       });
     }
 });
 
+
 /* Login */
 router.post('/login', (req, res, next) => {
   res.send('LOGIN');
+});
+
+
+/* Passport serialize and deserialize methods */
+passport.serializeUser((user_id, done) => {
+  done(null, user_id);
+});
+
+passport.deserializeUser((user_id, done) => {
+  done(null, user_id);
 });
 
 module.exports = router;

@@ -3,7 +3,11 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
+const passport = require('passport');
 require('dotenv').config();
+
 
 // initialize the express application
 const app = express();
@@ -26,6 +30,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
+// sessions & passport
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // routes
 app.use('/auth', authRoutes);
 
@@ -33,6 +48,10 @@ app.get('/', (req, res) => {
 	res.render('welcome', {
     title: 'Welcome'
   });
+});
+
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
 });
 
 // start the server
