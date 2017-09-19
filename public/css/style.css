@@ -65,6 +65,7 @@
   margin-top: 200px;
   animation-name: modalopen;
   animation-duration: 0.7s;
+  box-shadow: 0 4px 6px 0 rgba(100, 100, 100, 0.4), 0 5px 15px 0;
 }
 
 @keyframes modalopen{
