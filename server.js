@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 require('dotenv').config();
 
 // initialize the express application
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 // routes
 app.use('/auth', authRoutes);

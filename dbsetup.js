@@ -39,3 +39,5 @@ db.query(sql, (err, result) => {
   console.log(result);
   console.log('Table created');
 })
+
+// username and email should also be unique
