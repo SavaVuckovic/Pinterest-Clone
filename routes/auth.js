@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-//const expressValidator = require('express-validator');
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
 const db = require('../db');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 /* Register */
 router.post('/register', [
@@ -15,8 +16,6 @@ router.post('/register', [
     check('password2', 'Passwords do not match, please try again.').exists().custom((value, { req }) => value === req.body.password)
   ],
   (req, res, next) => {
-    //req.assert('password2', 'Passwords do not match, please try again.').equals(req.body.password);
-    //let mappedErrors = req.validationErrors(true);
     // check for validation errors
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -27,12 +26,18 @@ router.post('/register', [
       const username = req.body.username;
       const email = req.body.email;
       const password = req.body.password;
-      // if the values are valid, insert the new user into the database
-      let sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-      db.query(sql, [username, email, password], (err, result, fields) => {
+      // check if user already exists in the database
+      // .....
+
+      // hash the password and save the user into a database
+      bcrypt.hash(password, saltRounds, (err, passwordHash) => {
         if(err) throw err;
-        res.render('welcome', {
-          title: 'Registration successful'
+        let sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+        db.query(sql, [username, email, passwordHash], (err, result, fields) => {
+          if(err) throw err;
+          res.render('welcome', {
+            title: 'Registration successful'
+          });
         });
       });
     }
