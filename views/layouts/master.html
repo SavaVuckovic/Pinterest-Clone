@@ -10,15 +10,16 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- Additional Page-Specific CSS -->
+    {% block stylesheets %}{% endblock %}
   </head>
   <body>
 
     <!-- Navbar -->
     <nav class="navbar">
+      <a href="/"><img src="/images/logo.png" class="logo" alt="logo"></a>
       <ul class="navbar-left">
-        <li><a href="#">Placeholder</a></li>
-        <li><a href="#">Placeholder</a></li>
         <li><a href="#">Placeholder</a></li>
       </ul>
       <ul class="navbar-right">

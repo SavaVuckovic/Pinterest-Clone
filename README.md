@@ -16,3 +16,5 @@ TODOS:
 - create page for showing individual pin
 - add comments section on individual pin page
 - implement better error handling
+- make pages mobile-responsive
+- add more visual details

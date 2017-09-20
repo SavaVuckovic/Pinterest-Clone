@@ -4,8 +4,10 @@ const db = require('./database');
 
 module.exports = function(passport) {
   // passport local strategy
-  passport.use(new localStrategy((username, password, done) => {
-    let sql = 'SELECT id, password FROM users WHERE username = ?';
+  passport.use(new localStrategy(
+    { usernameField: 'email' },
+    (username, password, done) => {
+    let sql = 'SELECT id, password FROM users WHERE email = ?';
     db.query(sql, [username], (err, results, fields) => {
       if(err) {
         return done(err);

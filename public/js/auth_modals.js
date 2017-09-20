@@ -1,9 +1,9 @@
 var loginBtn = document.querySelector('#login-btn');
 var registerBtn = document.querySelector('#register-btn');
-var loginModal = document.querySelector('.login-modal');
-var registerModal = document.querySelector('.register-modal');
-var closeLoginBtn = document.querySelector('.modal-close-login');
-var closeRegisterBtn = document.querySelector('.modal-close-register');
+var loginModal = document.querySelector('#login-modal');
+var registerModal = document.querySelector('#register-modal');
+var closeLoginBtn = document.querySelector('#close-login');
+var closeRegisterBtn = document.querySelector('#close-register');
 
 // open login modal
 loginBtn.addEventListener('click', function() {

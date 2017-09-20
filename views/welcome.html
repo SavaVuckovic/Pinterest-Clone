@@ -4,26 +4,40 @@
 {{ title }}
 {% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/modals_and_forms.css">
+{% endblock %}
+
 {% block body %}
-<div class="container">
-  Welcome
+<div class="container-fluid body-wrapper">
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
+  <h1>Pinterest Style Wall</h1>
 </div>
 
 <!-- Login Modal -->
-<div class="login-modal">
+<div class="modal" id="login-modal">
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="login-modal-content col-md-6">
+      <div class="modal-content col-md-6">
 
-        <div class="login-modal-header">
+        <div class="modal-header">
           <h2>Login</h2>
-          <span class="modal-close-login">&times;</span>
+          <span class="modal-close" id="close-login">&times;</span>
         </div>
         <hr>
-        <div class="login-modal-body">
-          <form class="login-form" method="post" action="/auth/login">
-            <!--<input type="email" name="email" placeholder="Email">-->
-            <input type="text" name="username" placeholder="Username">
+        <div class="modal-body">
+          <form class="form" method="post" action="/auth/login">
+            <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
             <button type="submit">Login</button>
           </form>
@@ -35,18 +49,18 @@
 </div>
 
 <!-- Register Modal -->
-<div class="register-modal">
+<div class="modal" id="register-modal">
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="register-modal-content col-md-6">
+      <div class="modal-content col-md-6">
 
-        <div class="register-modal-header">
+        <div class="modal-header">
           <h2>Register</h2>
-          <span class="modal-close-register">&times;</span>
+          <span class="modal-close" id="close-register">&times;</span>
         </div>
         <hr>
-        <div class="register-modal-body">
-          <form class="register-form" method="post" action="/auth/register">
+        <div class="modal-body">
+          <form class="form" method="post" action="/auth/register">
             <input type="text" name="username" placeholder="Username">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
@@ -60,7 +74,7 @@
   </div>
 </div>
 
-<!-- Login Modal Script -->
+<!-- Modals Script -->
 <script src="/js/auth_modals.js"></script>
 
 {% endblock %}
