@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+const bcrypt = require('bcrypt');
 const passport = require('passport');
+const localStrategy = require('passport-local');
+const authMiddleware = require('./middlewares/auth');
 require('dotenv').config();
 
 
@@ -31,14 +35,47 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
 // sessions & passport
+const storeOptions = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+};
+var sessionStore = new MySQLStore(storeOptions);
+
 app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: sessionStore,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// passport local strategy
+passport.use(new localStrategy((username, password, done) => {
+  const db = require('./db');
+  let sql = 'SELECT id, password FROM user WHERE username = ?';
+  db.query(sql, [username], (err, results, fields) => {
+    if(err) {
+      done(err);
+    }
+    if(results.length === 0) {
+      done(null, false);
+    }
+    // compare the password with the hashed one in the database
+    const hash = results[0].password.toString();
+    bcrypt.compare(password, hash, (err, response) => {
+      // passwords match, login the user
+      if(response === true) {
+        return done(null, { user_id: results[0].id })
+      } else {
+        return done(null, false);
+      }
+    });
+  });
+}));
 
 
 // routes
@@ -50,7 +87,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', authMiddleware(), (req, res) => {
   res.render('dashboard');
 });
 

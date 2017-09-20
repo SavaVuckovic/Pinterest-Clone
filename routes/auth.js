@@ -53,9 +53,10 @@ router.post('/register', [
 
 
 /* Login */
-router.post('/login', (req, res, next) => {
-  res.send('LOGIN');
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/'
+}));
 
 
 /* Passport serialize and deserialize methods */
