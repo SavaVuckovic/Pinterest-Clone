@@ -9,7 +9,6 @@ TODOS:
 - implement facebook OAuth
 - implement twitter OAuth
 - create users profile page
-- modularize css
 - implement pin-creating functionallity
 - show pins on both welcome and home pages
 - enable users to edit/delete their own pins
@@ -18,3 +17,6 @@ TODOS:
 - implement better error handling
 - make pages mobile-responsive
 - add more visual details
+- .....
+- finishing touches, commenting code, adding credits
+- deploy to Heroku

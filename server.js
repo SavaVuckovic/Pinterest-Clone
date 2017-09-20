@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const nunjucks = require('nunjucks');
+const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
@@ -23,6 +24,9 @@ nunjucks.configure(path.join(__dirname, 'views'), {
     autoescape: true,
     express: app
 });
+
+// serve favicon
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
