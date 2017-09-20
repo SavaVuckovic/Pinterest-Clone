@@ -56,27 +56,33 @@ app.use(passport.session());
 // passport local strategy
 passport.use(new localStrategy((username, password, done) => {
   const db = require('./db');
-  let sql = 'SELECT id, password FROM user WHERE username = ?';
+  let sql = 'SELECT id, password FROM users WHERE username = ?';
   db.query(sql, [username], (err, results, fields) => {
     if(err) {
-      done(err);
+      return done(err);
     }
     if(results.length === 0) {
-      done(null, false);
+      return done(null, false);
+    } else {
+      // compare the password with the hashed one in the database
+      const hash = results[0].password.toString();
+      bcrypt.compare(password, hash, (err, response) => {
+        // passwords match, login the user
+        if(response === true) {
+          return done(null, { user_id: results[0].id })
+        } else {
+          return done(null, false);
+        }
+      });
     }
-    // compare the password with the hashed one in the database
-    const hash = results[0].password.toString();
-    bcrypt.compare(password, hash, (err, response) => {
-      // passwords match, login the user
-      if(response === true) {
-        return done(null, { user_id: results[0].id })
-      } else {
-        return done(null, false);
-      }
-    });
   });
 }));
 
+// send authentication status with every response
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
 
 // routes
 app.use('/auth', authRoutes);

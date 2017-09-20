@@ -38,7 +38,8 @@
   margin: 10px;
 }
 
-.navbar ul li a {
+.navbar ul li a,
+.navbar ul li span {
   color: #0287c8;
   font-weight: bold;
   text-decoration: none;

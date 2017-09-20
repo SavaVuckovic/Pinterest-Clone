@@ -22,8 +22,12 @@
         <li><a href="#">Placeholder</a></li>
       </ul>
       <ul class="navbar-right">
-        <li><a href="#" id="login-btn">Login</a></li>
-        <li><a href="#" id="register-btn">Register</a></li>
+        {% if isAuthenticated %}
+          <li><a href="/auth/logout">Logout</a></li>
+        {% else %}
+          <li><span id="login-btn">Login</span></li>
+          <li><span id="register-btn">Register</span></li>
+        {% endif %}
       </ul>
       <div class="clearfix"></div>
     </nav>

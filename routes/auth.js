@@ -58,6 +58,13 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/'
 }));
 
+/* Logout */
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.redirect('/');
+});
+
 
 /* Passport serialize and deserialize methods */
 passport.serializeUser((user_id, done) => {
