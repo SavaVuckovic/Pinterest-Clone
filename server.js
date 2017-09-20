@@ -3,14 +3,11 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const localStrategy = require('passport-local');
-const authMiddleware = require('./middlewares/auth');
-require('dotenv').config();
+require('dotenv').config({path: './config/.env'});
 
 
 // initialize the express application
@@ -18,6 +15,7 @@ const app = express();
 
 // require routes
 const authRoutes = require('./routes/auth');
+const indexRoutes = require('./routes/index');
 
 // view engine setup
 app.set('view engine', 'html');
@@ -29,7 +27,7 @@ nunjucks.configure(path.join(__dirname, 'views'), {
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// body parser
+// body parser & express validator
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
@@ -50,52 +48,22 @@ app.use(session({
   saveUninitialized: false,
   store: sessionStore,
 }));
+
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport local strategy
-passport.use(new localStrategy((username, password, done) => {
-  const db = require('./db');
-  let sql = 'SELECT id, password FROM users WHERE username = ?';
-  db.query(sql, [username], (err, results, fields) => {
-    if(err) {
-      return done(err);
-    }
-    if(results.length === 0) {
-      return done(null, false);
-    } else {
-      // compare the password with the hashed one in the database
-      const hash = results[0].password.toString();
-      bcrypt.compare(password, hash, (err, response) => {
-        // passwords match, login the user
-        if(response === true) {
-          return done(null, { user_id: results[0].id })
-        } else {
-          return done(null, false);
-        }
-      });
-    }
-  });
-}));
-
-// send authentication status with every response
+// send user and authentication status with every response
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.user = req.user || null;
   next();
 });
 
 // routes
+app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 
-app.get('/', (req, res) => {
-	res.render('welcome', {
-    title: 'Welcome'
-  });
-});
-
-app.get('/dashboard', authMiddleware(), (req, res) => {
-  res.render('dashboard');
-});
-
 // start the server
-app.listen(3333, () => console.log('Listening on port 3333...'));
+const PORT = process.env.PORT || 3333;
+app.listen(PORT, () => console.log(`Server started on port ${ PORT }`));
