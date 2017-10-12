@@ -2,6 +2,7 @@ const localStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const db = require('./database');
 
+// CHANGE
 module.exports = function(passport) {
   // passport local strategy
   passport.use(new localStrategy(
