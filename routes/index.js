@@ -1,6 +1,4 @@
-const express = require('express');
-const router = express.Router();
-const authMiddleware = require('../middlewares/auth');
+const router = require('express').Router();
 
 /* Welcome page */
 router.get('/', (req, res) => {
@@ -14,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 /* Home page */
-router.get('/home', authMiddleware, (req, res) => {
+router.get('/home', (req, res) => {
   res.render('home', {
     title: 'Home'
   });

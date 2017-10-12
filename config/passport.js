@@ -1,41 +1,50 @@
-const localStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
-const db = require('./database');
+const mongoose = require('mongoose');
+const User = require('../models/user');
+const keys = require('./keys');
+// strategies
+const localStrategy = require('passport-local');
 
-// CHANGE
+
+
+
 module.exports = function(passport) {
-  // passport local strategy
+  // local strategy
   passport.use(new localStrategy(
+    // use email instead of username (passports default)
     { usernameField: 'email' },
-    (username, password, done) => {
-    let sql = 'SELECT id, password FROM users WHERE email = ?';
-    db.query(sql, [username], (err, results, fields) => {
-      if(err) {
-        return done(err);
-      }
-      if(results.length === 0) {
-        return done(null, false);
-      } else {
-        // compare the password with the hashed one in the database
-        const hash = results[0].password.toString();
-        bcrypt.compare(password, hash, (err, response) => {
-          // passwords match, login the user
-          if(response === true) {
-            return done(null, { user_id: results[0].id })
-          } else {
-            return done(null, false);
+    (email, password, done) => {
+      // check if user exists in the database
+      User.findOne({ email })
+        .then((user) => {
+          // user doesn't exist
+          if(!user) {
+            return done(null, false, { message: 'no user found' });
           }
+          // check the password
+          bcrypt.compare(password, user.password, (err, matches) => {
+            if(err) {
+              next(err);
+            }
+            // passwords match
+            if(matches) {
+              return done(null, user);
+            } else {
+              return done(null, false);
+            }
+          });
         });
-      }
-    });
-  }));
+    }
+  ));
 
-  // serialize and deserialize user
+  // serialize
   passport.serializeUser((user_id, done) => {
     done(null, user_id);
   });
 
+  // deserialize
   passport.deserializeUser((user_id, done) => {
-    done(null, user_id);
+    User.findById(id)
+      .then((user) => done(null, user));
   });
 }

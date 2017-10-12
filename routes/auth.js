@@ -1,13 +1,11 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const { check, validationResult } = require('express-validator/check');
 const { matchedData } = require('express-validator/filter');
-const db = require('../config/database');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const User = require('../models/user');
 const passport = require('passport');
 
-/* Register */
+// register
 router.post('/register', [
     // validate form values
     check('username').isLength({ min: 4, max: 20 }).withMessage('Username must be between 4-20 characters long.'),
@@ -27,34 +25,60 @@ router.post('/register', [
       const username = req.body.username;
       const email = req.body.email;
       const password = req.body.password;
-      // check if user already exists in the database
-      // ...
-
-      // hash the password and save the user into a database
-      bcrypt.hash(password, saltRounds, (err, passwordHash) => {
-        if(err) throw err;
-        let sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-        db.query(sql, [username, email, passwordHash], (err, result, fields) => {
-          if(err) throw err;
-
-          // change later
-          res.send('registration successful');
+      // check if user already exists
+      User.findOne({ email })
+        .then((user) => {
+          if(user) {
+            // return error if user exists
+            req.flash('error_msg', 'User already exists');
+            res.redirect('/');
+          } else {
+            // hash the password and save the user in the database
+            bcrypt.genSalt(10, (err, salt) => {
+              bcrypt.hash(password, salt, (err, hash) => {
+                if(err) {
+                  next(err);
+                }
+                // save user in the database
+                const user = new User({
+                  username,
+                  email,
+                  password: hash
+                });
+                user.save((err) => {
+                  if(err) {
+                    return next(err);
+                  }
+                  req.flash('success_msg', 'Registration successful!');
+                  res.redirect('/');
+                });
+              });
+            });
+          }
         });
-      });
     }
 });
 
 
-/* Login */
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/'
-}));
+// login
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local',(err, user, info) => {
+    if (err) { return next(err); }
+    if (!user) {
+      req.flash('error_msg', 'Invalid username or password');
+      return res.redirect('/');
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/home');
+    });
+  })(req, res, next);
+});
 
-/* Logout */
+// logout
 router.get('/logout', (req, res) => {
-  req.session.destroy();
   req.logout();
+  req.flash('success_msg', 'Logged out, thanks for stopping by!');
   res.redirect('/');
 });
 

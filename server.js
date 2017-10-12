@@ -3,18 +3,28 @@ const path = require('path');
 const nunjucks = require('nunjucks');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
-require('dotenv').config({path: './config/.env'});
+const flash = require('connect-flash');
+const keys = require('./config/keys');
 
+// database connection
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI, { useMongoClient: true })
+  .then(() => console.log('Connection to MongoDB successful'))
+  .catch((err) => console.log(`Unable to connect to MongoDB: ${err}`));
+
+// import models
+const Pin = require('./models/pin');
+const User = require('./models/user');
 
 // initialize the express application
 const app = express();
 
-// require routes
+// import routes
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
 
@@ -36,38 +46,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
-// sessions & passport
-const storeOptions = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-};
-var sessionStore = new MySQLStore(storeOptions);
-
-app.use(cookieParser());
+// sessions
 app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  store: sessionStore,
+  secret: 'the_most_SECRET_K3Y',
+  resave: true,
+  saveUninitialized: true
 }));
 
+// flash messages
+app.use(flash());
+
+// passport
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// send user and authentication status with every response
+// global variables
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
   res.locals.user = req.user || null;
   next();
 });
-
 // routes
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 
 // start the server
-const PORT = process.env.PORT || 3333;
-app.listen(PORT, () => console.log(`Server started on port ${ PORT }`));
+const PORT = process.env.PORT || 4444;
+app.listen(PORT, () => console.log(`Application running on port ${ PORT }`));
