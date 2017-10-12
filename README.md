@@ -5,7 +5,6 @@ TODOS:
 
 
 - implement facebook OAuth (optional)
-- implement Google 0Auth
 - implement twitter OAuth
 - create users profile page
 - implement pin-creating functionallity

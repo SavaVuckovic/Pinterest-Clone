@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const requireAuth = require('../helpers/requireAuth');
 
 /* Welcome page */
 router.get('/', (req, res) => {
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 /* Home page */
-router.get('/home', (req, res) => {
+router.get('/home', requireAuth, (req, res) => {
   res.render('home', {
     title: 'Home'
   });
