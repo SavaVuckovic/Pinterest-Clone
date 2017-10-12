@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const keys = require('./keys');
 // strategies
-const localStrategy = require('passport-local');
-
-
+const localStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 module.exports = function(passport) {
@@ -36,6 +35,40 @@ module.exports = function(passport) {
         });
     }
   ));
+
+  // google strategy
+  passport.use(new GoogleStrategy({
+    clientID: keys.googleClientID,
+    clientSecret: keys.googleClientSecret,
+    callbackURL: '/auth/google/callback',
+    proxy: true // if we want to deploy to heroku later
+  },
+  (accessToken, refreshToken, profile, done) => {
+    // cut off everything after jpg in user image link
+    const cutIndex = profile.photos[0].value.indexOf('?');
+    const userImg = profile.photos[0].value.substring(0, cutIndex);
+    // create new user object
+    const newUser = {
+      googleID: profile.id,
+      username: profile.name.givenName,
+      email: profile.emails[0].value,
+      image: userImg
+    };
+    // check if user already exists
+    User.findOne({
+      googleID: profile.id
+    }).then((user) => {
+      if(user) {
+        // user already exists
+        done(null, user);
+      } else {
+        // create the user if he doesn't exist
+        new User(newUser)
+          .save()
+          .then((user) => done(null, user));
+      }
+    })
+  }));
 
   // serialize
   passport.serializeUser((user_id, done) => {

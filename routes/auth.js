@@ -5,6 +5,18 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const passport = require('passport');
 
+// google OAuth
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// google callback
+router.get('/google/callback', passport.authenticate('google', {
+  failureRedirect: '/'
+}), (req, res) => {
+  // Authentication successful
+  req.flash('success_msg', 'Hi, nice to see you!');
+  res.redirect('/home');
+});
+
 // register
 router.post('/register', [
     // validate form values

@@ -4,7 +4,6 @@ Pinterest clone built with NodeJS
 TODOS:
 
 
-- implement flash messages
 - implement facebook OAuth (optional)
 - implement Google 0Auth
 - implement twitter OAuth
