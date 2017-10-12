@@ -62,3 +62,30 @@ hr {
   text-decoration: none;
   font-size: 18px;
 }
+
+/* flash messsage */
+.flash {
+  position: fixed;
+  z-index: 1000;
+}
+
+.flash-success {
+  bottom: 0;
+  left: 0;
+  margin: 20px;
+  border: 1px solid #0a7027;
+  color: #0a7027;
+  background: #0c4f12;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.flash-error {
+  top: 0;
+  margin: 20px;
+  border: 1px solid #700a0a;
+  color: #700a0a;
+  background: #db3d3d;
+  font-weight: bold;
+  padding: 10px;
+}

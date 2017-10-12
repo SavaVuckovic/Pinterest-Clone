@@ -43,7 +43,7 @@ module.exports = function(passport) {
   });
 
   // deserialize
-  passport.deserializeUser((user_id, done) => {
+  passport.deserializeUser((id, done) => {
     User.findById(id)
       .then((user) => done(null, user));
   });
