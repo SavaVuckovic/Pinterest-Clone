@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+const multer = require('multer');
 const keys = require('./config/keys');
 
 // database connection

@@ -12,7 +12,17 @@
   <hr>
   <hr>
   <hr>
-  <form action="/pins/add" method="post">
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <form action="/pins/add" method="post" enctype="multipart/form-data">
 
     <textarea name="body" rows="8" cols="80"></textarea>
     Allow Comments?
@@ -22,6 +32,7 @@
       <option value="public" selected>Public</option>
     </select>
     <!-- Image -->
+    <input type="file" name="image">
 
     <button type="submit" name="submit">Add</button>
 

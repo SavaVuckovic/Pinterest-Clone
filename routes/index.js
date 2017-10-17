@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const requireAuth = require('../helpers/requireAuth');
 const Pin = require('../models/pin');
+// test
+const upload = require('../config/multer');
 
 /* Welcome page */
 router.get('/', (req, res) => {
@@ -20,28 +22,47 @@ router.get('/home', requireAuth, (req, res) => {
   });
 });
 
-/* Pins */ // TEST
+/* Pins */
 router.post('/pins/add', requireAuth, (req, res) => {
-  let allowComments;
+  upload(req, res, (err) => {
 
-  if(req.body.allowComments) {
-    allowComments = true;
-  } else {
-    allowComments = false;
-  }
+    if(err){
+      req.flash('error_msg', err);
+      res.redirect('/home');
+    } else {
+      if(req.file == undefined){
+        req.flash('error_msg', 'No file selected!');
+        res.redirect('/home');
+      } else {
 
-  const pin = new Pin({
-    body: req.body.body,
-    status: req.body.status,
-    allowComments: allowComments,
-    author: req.user.id
+        // successfully uploaded, save pin to the database
+        let allowComments;
+
+        if(req.body.allowComments) {
+          allowComments = true;
+        } else {
+          allowComments = false;
+        }
+
+        const pin = new Pin({
+          image: req.file.filename,
+          body: req.body.body,
+          status: req.body.status,
+          allowComments: allowComments,
+          author: req.user.id
+        });
+
+        pin.save().then((pin) => {
+          console.log(pin)
+          req.flash('Pin successfully created');
+          res.redirect(`/pins/${pin._id}`)
+        });
+
+      }
+    }
   });
 
-  pin.save().then((pin) => {
-    console.log(pin)
-    req.flash('Pin successfully created');
-    res.redirect(`/pins/${pin._id}`)
-  })
+
 });
 
 module.exports = router;

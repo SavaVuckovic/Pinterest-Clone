@@ -6,6 +6,10 @@ const PinSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   },
+  image: {
+    type: String,
+    required: true
+  },
   body: {
     type: String,
     required: true
