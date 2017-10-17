@@ -6,16 +6,25 @@
 
 {% block body %}
 <div class="container">
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
-  <h1>Dashboard</h1>
+  <!-- Add Pin -->
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <form action="/pins/add" method="post">
+
+    <textarea name="body" rows="8" cols="80"></textarea>
+    Allow Comments?
+    <input type="checkbox" name="allowComments" checked>
+    <select name="status">
+      <option value="private">Private</option>
+      <option value="public" selected>Public</option>
+    </select>
+    <!-- Image -->
+
+    <button type="submit" name="submit">Add</button>
+
+  </form>
 </div>
 {% endblock %}
