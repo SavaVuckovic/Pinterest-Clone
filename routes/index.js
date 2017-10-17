@@ -20,7 +20,7 @@ router.get('/home', requireAuth, (req, res) => {
   });
 });
 
-/* Pins */
+/* Pins */ // test
 router.post('/pins/add', requireAuth, (req, res) => {
   let allowComments;
 
