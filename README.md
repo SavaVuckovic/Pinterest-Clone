@@ -8,10 +8,12 @@ TODOS:
 - implement facebook OAuth (optional)
 - implement twitter OAuth
 - create users profile page
-- enable users to edit/delete their own pins
+- fix the redirect after edit pin bug
+- enable users to delete their own pins
 - add comments section on individual pin page
 - implement better error handling
 - make pages mobile-responsive
+- fix login and register modal showing
 - add more visual details
 - style, style, style
 - refactor, refactor, refactor

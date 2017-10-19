@@ -22,58 +22,57 @@
     <div class="pin">
       <img src="/images/uploads/{{pin.image}}" alt="">
       <div class="overlay">
-        <a href="#" class="overlay-link">More</a>
+        <a href="/pin/{{pin._id}}" class="overlay-link">More</a>
       </div>
       <p>{{pin.body}}</p>
     </div>
     {% endfor %}
   </div>
+</div>
 
-  <!-- New Pin Modal -->
-  <div class="modal" id="new-pin-modal">
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <div class="modal-content col-md-6">
+<!-- New Pin Modal -->
+<div class="modal" id="new-pin-modal">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="modal-content col-md-6">
 
-          <div class="modal-header">
-            <h2>Create New Pin</h2>
-            <span class="modal-close" id="close-new-pin">&times;</span>
-          </div>
-          <hr>
-          <div class="modal-body">
+        <div class="modal-header">
+          <h2>Create New Pin</h2>
+          <span class="modal-close" id="close-new-pin">&times;</span>
+        </div>
+        <hr>
+        <div class="modal-body">
 
-            <form class="form" action="/pins/add" method="post" enctype="multipart/form-data">
+          <form class="form" action="/pin/add" method="post" enctype="multipart/form-data">
 
-              <textarea name="body" rows="8" cols="80"></textarea>
+            <textarea name="body" rows="8" cols="80"></textarea>
 
-              <hr>
+            <hr>
 
-              Allow Comments?
-              <input type="checkbox" name="allowComments" checked>
+            Allow Comments?
+            <input type="checkbox" name="allowComments" checked>
 
-              <hr>
+            <hr>
 
-              <select name="status">
-                <option value="private">Private</option>
-                <option value="public" selected>Public</option>
-              </select>
+            <select name="status">
+              <option value="private">Private</option>
+              <option value="public" selected>Public</option>
+            </select>
 
-              <hr>
+            <hr>
 
-               Image
-              <input type="file" name="image">
+             Image
+            <input type="file" name="image">
 
-              <button type="submit" name="submit">Add</button>
+            <button type="submit" name="submit">Add</button>
 
-            </form>
-
-          </div>
+          </form>
 
         </div>
+
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- Modals Script -->

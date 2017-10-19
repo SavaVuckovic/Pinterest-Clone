@@ -6,23 +6,103 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/css/pin.css">
+<link rel="stylesheet" href="/css/modals_and_forms.css">
 {% endblock %}
 
 {% block body %}
 <div class="container">
   <div class="single-pin">
 
+    <h4>INFO</h4>
+    <hr>
     <img src="/images/uploads/{{pin.image}}" alt="pin">
     <hr>
     <p>{{pin.body}}</p>
     <p>{{pin.author}}</p>
     <p>{{pin.date}}</p>
-
     <p>{{pin.author.username}}</p>
     <p>{{pin.author.email}}</p>
-
     <img src="{{pin.author.image}}" alt="">
+    <hr>
+
+    <button id="edit-pin-btn">EDIT</button>
+    <button id="delete-pin-btn">DELETE</button>
 
   </div>
 </div>
+
+<!-- Edit Pin Modal -->
+<div class="modal" id="edit-pin-modal">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="modal-content col-md-6">
+
+        <div class="modal-header">
+          <h2>Edit Pin</h2>
+          <span class="modal-close" id="close-edit-pin">&times;</span>
+        </div>
+        <hr>
+        <div class="modal-body">
+
+          <form class="form" id="edit-form">
+            <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
+            <hr>
+            Allow Comments?
+            <input type="checkbox" name="allowComments" checked>
+            <hr>
+            <select name="status">
+              <option value="private">Private</option>
+              <option value="public" selected>Public</option>
+            </select>
+            <hr>
+            <button type="submit" name="submit">Add</button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var editForm = document.querySelector('#edit-form');
+
+editForm.addEventListener('submit', handleEditSubmit);
+
+function handleEditSubmit(e) {
+  // prevent default behavior
+  e.preventDefault();
+
+  // extract form values
+  console.log(e);
+
+  var editedPin = {
+    body: e.target.children.body.value,
+    status: e.target.children.status.value,
+    allowComments: e.target.children.allowComments.value
+  }
+
+  // construct the request and send it
+  var putRequest = new XMLHttpRequest();
+  putRequest.open('PUT', '/pin/edit/{{pin._id}}');
+  putRequest.setRequestHeader('Content-Type', 'application/json');
+  putRequest.onload = handleSuccess;
+  putRequest.onerror = handleError;
+  putRequest.send(JSON.stringify(editedPin));
+}
+
+function handleSuccess() {
+  var data = JSON.parse(this.responseText);
+  console.log(data);
+}
+
+function handleError() {
+  console.log('Error');
+}
+</script>
+
+<!-- Modals Script -->
+<script src="/js/edit_delete_modals.js"></script>
+
 {% endblock %}

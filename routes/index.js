@@ -39,7 +39,30 @@ router.get('/pin/:id', (req, res) => {
     })
 });
 
-router.post('/pins/add', requireAuth, (req, res) => {
+router.put('/pin/edit/:id', requireAuth, (req, res) => {
+  Pin.findOne({ _id: req.params.id })
+    .then((pin) => {
+      let allowComments;
+
+      if(req.body.allowComments) {
+        allowComments = true;
+      } else {
+        allowComments = false;
+      }
+
+      pin.body = req.body.body;
+      pin.status = req.body.status;
+      pin.allowComments = allowComments;
+
+      pin.save()
+        .then((pin) => {
+          req.flash('success_msg', 'Pin Edited');
+          res.redirect('/home');
+        })
+    })
+});
+
+router.post('/pin/add', requireAuth, (req, res) => {
   upload(req, res, (err) => {
 
     if(err){
@@ -70,7 +93,7 @@ router.post('/pins/add', requireAuth, (req, res) => {
 
         pin.save().then((pin) => {
           console.log(pin)
-          req.flash('Pin successfully created');
+          req.flash('success_msg', 'Pin successfully created');
           res.redirect(`/pin/${pin._id}`)
         });
 
