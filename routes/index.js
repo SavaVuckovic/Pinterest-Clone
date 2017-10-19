@@ -21,9 +21,13 @@ router.get('/', (req, res) => {
 
 /* Home page */
 router.get('/home', requireAuth, (req, res) => {
-  res.render('home', {
-    title: 'Home'
-  });
+  Pin.find({ status: 'public' })
+    .then((pins) => {
+      res.render('home', {
+        title: 'Home',
+        pins
+      });
+    });
 });
 
 /* Pins */

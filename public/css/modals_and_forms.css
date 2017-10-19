@@ -83,3 +83,8 @@
   color: #fff;
   background: #0287c8;
 }
+
+/* New Pin Modal Form */
+.form textarea {
+  width: 100%;
+}

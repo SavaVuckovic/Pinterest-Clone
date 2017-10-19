@@ -13,11 +13,6 @@
 <div class="container-fluid body-wrapper">
   <div class="pinterest-grid">
 
-    <div class="pin">
-      <img src="/images/placeholder.jpg" alt="">
-      <h1>FIRST</h1>
-    </div>
-
     {% for pin in pins %}
     <div class="pin">
       <img src="/images/uploads/{{pin.image}}" alt="">
@@ -27,7 +22,6 @@
       <p>{{pin.body}}</p>
     </div>
     {% endfor %}
-
 
   </div>
 </div>

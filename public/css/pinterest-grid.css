@@ -25,6 +25,29 @@
   width: 100%;
 }
 
+.new-pin {
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 10px 10px;
+  min-height: 200px;
+  background: #ddd;
+  border: 5px solid #fff;
+  border-radius: 15px;
+}
+
+.new-pin h1 {
+  font-size: 100px;
+}
+
+.new-pin h2 {
+  font-size: 22px;
+}
+
+.new-pin h1,
+.new-pin h2 {
+  color: #0287c8;
+}
+
 .overlay {
   position: absolute;
   top: 0;
