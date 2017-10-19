@@ -10,6 +10,7 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const multer = require('multer');
+const methodOverride = require('method-override');
 const keys = require('./config/keys');
 
 // database connection
@@ -28,6 +29,9 @@ const app = express();
 // import routes
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
+
+// method override
+app.use(methodOverride('_method'));
 
 // view engine setup
 app.set('view engine', 'html');

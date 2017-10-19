@@ -92,7 +92,6 @@ router.post('/pin/add', requireAuth, (req, res) => {
         });
 
         pin.save().then((pin) => {
-          console.log(pin)
           req.flash('success_msg', 'Pin successfully created');
           res.redirect(`/pin/${pin._id}`)
         });

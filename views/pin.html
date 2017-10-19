@@ -44,7 +44,8 @@
         <hr>
         <div class="modal-body">
 
-          <form class="form" id="edit-form">
+          <form class="form" id="edit-form" action="/pin/edit/{{pin._id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
             <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
             <hr>
             Allow Comments?
@@ -65,42 +66,6 @@
   </div>
 </div>
 
-<script>
-var editForm = document.querySelector('#edit-form');
-
-editForm.addEventListener('submit', handleEditSubmit);
-
-function handleEditSubmit(e) {
-  // prevent default behavior
-  e.preventDefault();
-
-  // extract form values
-  console.log(e);
-
-  var editedPin = {
-    body: e.target.children.body.value,
-    status: e.target.children.status.value,
-    allowComments: e.target.children.allowComments.value
-  }
-
-  // construct the request and send it
-  var putRequest = new XMLHttpRequest();
-  putRequest.open('PUT', '/pin/edit/{{pin._id}}');
-  putRequest.setRequestHeader('Content-Type', 'application/json');
-  putRequest.onload = handleSuccess;
-  putRequest.onerror = handleError;
-  putRequest.send(JSON.stringify(editedPin));
-}
-
-function handleSuccess() {
-  var data = JSON.parse(this.responseText);
-  console.log(data);
-}
-
-function handleError() {
-  console.log('Error');
-}
-</script>
 
 <!-- Modals Script -->
 <script src="/js/edit_delete_modals.js"></script>
