@@ -1,0 +1,28 @@
+{% extends 'layouts/master.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/pin.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="single-pin">
+
+    <img src="/images/uploads/{{pin.image}}" alt="pin">
+    <hr>
+    <p>{{pin.body}}</p>
+    <p>{{pin.author}}</p>
+    <p>{{pin.date}}</p>
+
+    <p>{{pin.author.username}}</p>
+    <p>{{pin.author.email}}</p>
+
+    <img src="{{pin.author.image}}" alt="">
+
+  </div>
+</div>
+{% endblock %}

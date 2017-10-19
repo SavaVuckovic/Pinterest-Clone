@@ -31,6 +31,14 @@ router.get('/home', requireAuth, (req, res) => {
 });
 
 /* Pins */
+router.get('/pin/:id', (req, res) => {
+  Pin.findOne({ _id: req.params.id })
+    .populate('author')
+    .then((pin) => {
+      res.render('pin', { pin })
+    })
+});
+
 router.post('/pins/add', requireAuth, (req, res) => {
   upload(req, res, (err) => {
 
@@ -63,7 +71,7 @@ router.post('/pins/add', requireAuth, (req, res) => {
         pin.save().then((pin) => {
           console.log(pin)
           req.flash('Pin successfully created');
-          res.redirect(`/pins/${pin._id}`)
+          res.redirect(`/pin/${pin._id}`)
         });
 
       }
