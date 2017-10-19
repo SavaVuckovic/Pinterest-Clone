@@ -9,9 +9,13 @@ router.get('/', (req, res) => {
   if(req.isAuthenticated()) {
     res.redirect('/home');
   } else {
-    res.render('welcome', {
-      title: 'Welcome'
-    });
+    Pin.find({ status: 'public' })
+      .then((pins) => {
+        res.render('welcome', {
+          title: 'Welcome',
+          pins
+        });
+      });
   }
 });
 
@@ -61,8 +65,6 @@ router.post('/pins/add', requireAuth, (req, res) => {
       }
     }
   });
-
-
 });
 
 module.exports = router;

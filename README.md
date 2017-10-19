@@ -3,7 +3,6 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- allow users to add images
 - create and style modal for adding pins
 - implement facebook OAuth (optional)
 - implement twitter OAuth

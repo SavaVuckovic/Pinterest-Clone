@@ -29,5 +29,4 @@ const upload = multer({
   }
 }).single('image');
 
-// test
 module.exports = upload;
