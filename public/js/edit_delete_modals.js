@@ -3,7 +3,7 @@ var deletePin = document.querySelector('#delete-pin-btn');
 var editPinModal = document.querySelector('#edit-pin-modal');
 var deletePinModal = document.querySelector('#delete-pin-modal');
 var closeEditBtn = document.querySelector('#close-edit-pin');
-var closeDeleteBtn = document.querySelector('#close-delete-btn');
+var closeDeleteBtn = document.querySelector('#close-delete-pin');
 
 
 // open new pin modal

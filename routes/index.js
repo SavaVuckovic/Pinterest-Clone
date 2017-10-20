@@ -34,6 +34,7 @@ router.get('/home', requireAuth, (req, res) => {
 router.get('/pin/:id', (req, res) => {
   Pin.findOne({ _id: req.params.id })
     .populate('author')
+    .populate('comments.commentAuthor')
     .then((pin) => {
       res.render('pin', { pin })
     })
