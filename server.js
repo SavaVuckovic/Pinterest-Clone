@@ -29,6 +29,7 @@ const app = express();
 // import routes
 const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
+const pinRoutes = require('./routes/pin');
 
 // method override
 app.use(methodOverride('_method'));
@@ -76,6 +77,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
+app.use('/pin', pinRoutes);
 
 // start the server
 const PORT = process.env.PORT || 4444;

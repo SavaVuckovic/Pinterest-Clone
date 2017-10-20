@@ -3,9 +3,7 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- fix login and register modal not showing
 - remove uploaded images from github
-- routes refactor
 
 - connect pages with links
 - style modal for adding pins
