@@ -2,4 +2,4 @@ node_modules
 keys.js
 keys_prod.js
 keys_dev.js
-uploads
+public/images/uploads

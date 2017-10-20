@@ -56,7 +56,32 @@
               <option value="public" selected>Public</option>
             </select>
             <hr>
-            <button type="submit" name="submit">Add</button>
+            <button type="submit" name="submit">Update</button>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Pin Modal -->
+<div class="modal" id="delete-pin-modal">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="modal-content col-md-6">
+
+        <div class="modal-header">
+          <h2>Delete Pin</h2>
+          <span class="modal-close" id="close-delete-pin">&times;</span>
+        </div>
+        <hr>
+        <div class="modal-body">
+
+          <form class="form" id="edit-form" action="/pin/delete/{{pin._id}}?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" name="submit">Delete</button>
           </form>
 
         </div>

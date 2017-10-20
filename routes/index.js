@@ -62,6 +62,14 @@ router.put('/pin/edit/:id', requireAuth, (req, res) => {
     })
 });
 
+router.delete('/pin/delete/:id', requireAuth, (req, res) => {
+  Pin.remove({ _id: req.params.id })
+    .then(() => {
+      req.flash('success_msg', 'Pin Deleted Successfully');
+      res.redirect('/home');
+    });
+});
+
 router.post('/pin/add', requireAuth, (req, res) => {
   upload(req, res, (err) => {
 
