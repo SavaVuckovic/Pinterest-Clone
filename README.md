@@ -3,18 +3,17 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- connect pages with links
+- fix login and register modal not showing
 - remove uploaded images from github
+- routes refactor
+
+- connect pages with links
 - style modal for adding pins
 - implement facebook OAuth (optional)
 - implement twitter OAuth
-- create users profile page
-- add comments section on individual pin page
 - implement better error handling
 - make pages mobile-responsive
-- fix login and register modal showing
 - add more visual details
-- never show private stories
 - access controlls
 - style, style, style
 - refactor, refactor, refactor

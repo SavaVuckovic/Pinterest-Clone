@@ -1,0 +1,47 @@
+{% extends 'layouts/master.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/user.css">
+<link rel="stylesheet" href="/css/modals_and_forms.css">
+<link rel="stylesheet" href="/css/pinterest-grid.css">
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+  <!-- User -->
+  <div class="row user">
+    <div class="col-md-3">
+      <img id="user-avatar" src="{{user.image}}" alt="user">
+    </div>
+    <div class="col-md-9">
+      <h1>{{user.username}}</h1>
+      <h3>Joined: {{user.date}}</h3>
+    </div>
+  </div>
+
+  <!-- Pins by user -->
+  <div class="pinterest-grid">
+
+    {% for pin in pins %}
+    <div class="pin">
+      <img src="/images/uploads/{{pin.image}}" alt="">
+      <div class="overlay">
+        <a href="/pin/{{pin._id}}" class="overlay-link">More</a>
+      </div>
+      <p>{{pin.body}}</p>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+
+<!-- Modals Script -->
+<script src="/js/edit_delete_modals.js"></script>
+
+{% endblock %}

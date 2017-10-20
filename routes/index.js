@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const requireAuth = require('../helpers/requireAuth');
 const Pin = require('../models/pin');
+const User = require('../models/user');
 // test
 const upload = require('../config/multer');
 
@@ -28,6 +29,20 @@ router.get('/home', requireAuth, (req, res) => {
         pins
       });
     });
+});
+
+/* User */
+router.get('/:username', (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then((user) => {
+      Pin.find({
+        status: 'public',
+        author: user._id
+      })
+      .then((pins) => {
+        res.render('user', { user, pins });
+      })
+    })
 });
 
 /* Pins */
