@@ -23,6 +23,17 @@
     <p>{{pin.author.username}}</p>
     <p>{{pin.author.email}}</p>
     <img src="{{pin.author.image}}" alt="">
+
+    {% if pin.allowComments %}
+    <h2>Write a Comment</h2>
+    <form class="form" action="/pin/comment/{{pin.id}}" method="POST">
+      <textarea name="commentBody" rows="8" cols="80"></textarea>
+      <button type="submit">Add Comment</button>
+    </form>
+    {% else %}
+    <h2>Log in to write a comment</h2>
+    {% endif %}
+
     <hr>
 
     <button id="edit-pin-btn">EDIT</button>

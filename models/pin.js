@@ -27,14 +27,14 @@ const PinSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    commentDate: {
-      type: Date,
-      default: Date.now
-    },
     commentAuthor: {
       // related to users from another collection
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
+    },
+    commentDate: {
+      type: Date,
+      default: Date.now
     }
   }],
   date: {

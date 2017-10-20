@@ -109,4 +109,23 @@ router.post('/pin/add', requireAuth, (req, res) => {
   });
 });
 
+// Comments
+
+router.post('/pin/comment/:id', (req, res) => {
+  Pin.findOne({ _id: req.params.id })
+    .then((pin) => {
+      const newComment = {
+        commentBody: req.body.commentBody,
+        commentAuthor: req.user.id,
+      }
+
+      pin.comments.unshift(newComment);
+      pin.save()
+        .then((pin) => {
+          req.flash('Comment Added');
+          res.redirect(`/pin/${pin.id}`);
+        })
+    })
+});
+
 module.exports = router;
