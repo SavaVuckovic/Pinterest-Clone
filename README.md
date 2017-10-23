@@ -3,8 +3,6 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- remove uploaded images from github
-
 - connect pages with links
 - style modal for adding pins
 - implement facebook OAuth (optional)

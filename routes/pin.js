@@ -3,50 +3,10 @@ const requireAuth = require('../helpers/requireAuth');
 const Pin = require('../models/pin');
 const upload = require('../config/multer');
 
-/* Pins */
-router.get('/:id', (req, res) => {
-  Pin.findOne({ _id: req.params.id })
-    .populate('author')
-    .populate('comments.commentAuthor')
-    .then((pin) => {
-      res.render('pin', { pin })
-    })
-});
-
-router.put('/edit/:id', requireAuth, (req, res) => {
-  Pin.findOne({ _id: req.params.id })
-    .then((pin) => {
-      let allowComments;
-
-      if(req.body.allowComments) {
-        allowComments = true;
-      } else {
-        allowComments = false;
-      }
-
-      pin.body = req.body.body;
-      pin.status = req.body.status;
-      pin.allowComments = allowComments;
-
-      pin.save()
-        .then((pin) => {
-          req.flash('success_msg', 'Pin Edited');
-          res.redirect('/home');
-        })
-    })
-});
-
-router.delete('/delete/:id', requireAuth, (req, res) => {
-  Pin.remove({ _id: req.params.id })
-    .then(() => {
-      req.flash('success_msg', 'Pin Deleted Successfully');
-      res.redirect('/home');
-    });
-});
-
+// post pin (for creating a new pin)
 router.post('/add', requireAuth, (req, res) => {
+  // uploading the pin image
   upload(req, res, (err) => {
-
     if(err){
       req.flash('error_msg', err);
       res.redirect('/home');
@@ -55,15 +15,8 @@ router.post('/add', requireAuth, (req, res) => {
         req.flash('error_msg', 'No file selected!');
         res.redirect('/home');
       } else {
-
         // successfully uploaded, save pin to the database
-        let allowComments;
-
-        if(req.body.allowComments) {
-          allowComments = true;
-        } else {
-          allowComments = false;
-        }
+        let allowComments = req.body.allowComments ? true : false;
 
         const pin = new Pin({
           image: req.file.filename,
@@ -77,15 +30,54 @@ router.post('/add', requireAuth, (req, res) => {
           req.flash('success_msg', 'Pin successfully created');
           res.redirect(`/pin/${pin._id}`)
         });
-
       }
     }
   });
 });
 
-// Comments
+// get individual pin page
+router.get('/:id', (req, res) => {
+  Pin.findOne({ _id: req.params.id })
+    .populate('author')
+    .populate('comments.commentAuthor')
+    .sort({ date: 'desc' })
+    .then((pin) => {
+      res.render('pin', { pin })
+    })
+});
 
+// put pin (for updating pins)
+router.put('/edit/:id', requireAuth, (req, res) => {
+  // NEEDS TO BE IMPROVED
+  Pin.findOne({ _id: req.params.id })
+    .then((pin) => {
+      pin.body = req.body.body;
+      pin.status = req.body.status;
+      pin.allowComments = req.body.allowComments ? true : false;
+
+      pin.save()
+        .then((pin) => {
+          req.flash('success_msg', 'Pin Edited');
+          res.redirect('/home');
+        })
+    })
+});
+
+// delete pin
+router.delete('/delete/:id', requireAuth, (req, res) => {
+  // NEEDS TO BE IMPROVED
+  Pin.remove({ _id: req.params.id })
+    .then(() => {
+      req.flash('success_msg', 'Pin Deleted Successfully');
+      res.redirect('/home');
+    });
+});
+
+
+
+// post a comment
 router.post('/comment/:id', (req, res) => {
+  // NEEDS TO BE IMPROVED
   Pin.findOne({ _id: req.params.id })
     .then((pin) => {
       const newComment = {

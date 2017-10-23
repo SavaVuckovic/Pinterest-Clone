@@ -3,33 +3,27 @@ const requireAuth = require('../helpers/requireAuth');
 const Pin = require('../models/pin');
 const User = require('../models/user');
 
-/* Welcome page */
+// get welcome page
 router.get('/', (req, res) => {
   if(req.isAuthenticated()) {
     res.redirect('/home');
   } else {
     Pin.find({ status: 'public' })
       .then((pins) => {
-        res.render('welcome', {
-          title: 'Welcome',
-          pins
-        });
+        res.render('welcome', { pins });
       });
   }
 });
 
-/* Home page */
+// get home page
 router.get('/home', requireAuth, (req, res) => {
   Pin.find({ status: 'public' })
     .then((pins) => {
-      res.render('home', {
-        title: 'Home',
-        pins
-      });
+      res.render('home', { pins });
     });
 });
 
-/* User */
+// get user page
 router.get('/:username', (req, res) => {
   User.findOne({ username: req.params.username })
     .then((user) => {

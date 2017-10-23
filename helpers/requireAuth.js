@@ -1,4 +1,4 @@
-// restrict routes to unauthenticated users
+// restrict routes for unauthenticated users
 module.exports = function requireAuth(req, res, next) {
 	  if (req.isAuthenticated()) {
 			return next();

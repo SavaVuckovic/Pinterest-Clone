@@ -17,13 +17,13 @@ router.get('/google/callback', passport.authenticate('google', {
   res.redirect('/home');
 });
 
-// register
-router.post('/register', [
+// signup
+router.post('/signup', [
     // validate form values
     check('username').isLength({ min: 4, max: 20 }).withMessage('Username must be between 4-20 characters long.'),
     check('email').isEmail().withMessage('The email you entered is invalid, please try again.'),
     check('email').isLength({ min: 4, max: 100 }).withMessage('Email address must be between 4-100 characters long, please try again.'),
-    check('password', 'Password must be at least 10 characters long and contain one number').isLength({ min: 10 }).matches(/\d/),
+    check('password', 'Password must be at least 8 characters long and contain one number').isLength({ min: 8 }).matches(/\d/),
     check('password2', 'Passwords do not match, please try again.').exists().custom((value, { req }) => value === req.body.password)
   ],
   (req, res, next) => {
@@ -51,7 +51,7 @@ router.post('/register', [
                 if(err) {
                   next(err);
                 }
-                // save user in the database
+                // create new user object and save in the database
                 const user = new User({
                   username,
                   email,
@@ -74,12 +74,15 @@ router.post('/register', [
 
 // login
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local',(err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
+    // if invalid username or password
     if (!user) {
       req.flash('error_msg', 'Invalid username or password');
       return res.redirect('/');
     }
+
+    // log the user in
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.redirect('/home');

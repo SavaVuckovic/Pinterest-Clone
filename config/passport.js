@@ -25,7 +25,7 @@ module.exports = function(passport) {
             if(err) {
               next(err);
             }
-            // passwords match
+            // clheck if passwords match
             if(matches) {
               return done(null, user);
             } else {
@@ -41,7 +41,7 @@ module.exports = function(passport) {
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
-    proxy: true // if we want to deploy to heroku later
+    proxy: true // needed for Heroku
   },
   (accessToken, refreshToken, profile, done) => {
     // cut off everything after jpg in user image link

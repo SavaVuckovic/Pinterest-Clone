@@ -5,7 +5,8 @@ const uuid = require('uuid');
 // multer storage
 const storage = multer.diskStorage({
   destination: './public/images/uploads/',
-  filename: function(req, file, cb){
+  filename: (req, file, cb) => {
+    // define what the image name will be (unique UUID + extension)
     cb(null, `pin_${uuid()}${path.extname(file.originalname).toLowerCase()}`);
   }
 });
@@ -16,7 +17,7 @@ const upload = multer({
   limits: {fileSize: 1000000},
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif/;
-    // check exttension
+    // check extension
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     // check mime type
     const mimetype = allowedTypes.test(file.mimetype);

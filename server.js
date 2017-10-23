@@ -27,8 +27,8 @@ const User = require('./models/user');
 const app = express();
 
 // import routes
-const authRoutes = require('./routes/auth');
 const indexRoutes = require('./routes/index');
+const authRoutes = require('./routes/auth');
 const pinRoutes = require('./routes/pin');
 
 // method override
@@ -37,8 +37,8 @@ app.use(methodOverride('_method'));
 // view engine setup
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, 'views'), {
-    autoescape: true,
-    express: app
+  autoescape: true,
+  express: app
 });
 
 // serve favicon
@@ -54,7 +54,7 @@ app.use(expressValidator());
 
 // sessions
 app.use(session({
-  secret: 'the_most_SECRET_K3Y',
+  secret: keys.sessionSecret,
   resave: true,
   saveUninitialized: true
 }));
@@ -74,6 +74,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
+
 // routes
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
