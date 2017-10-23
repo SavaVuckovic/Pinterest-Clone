@@ -1,55 +1,28 @@
 /* compressed css reset */
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #cccccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
 
+
 /* general rules */
 body * {
   font-family: 'Droid Sans', sans-serif;
   color: #222;
 }
 
-hr {
-  margin: 5px;
-}
-
 .clearfix {
   clear: both;
 }
 
-.body-wrapper {
-  padding-top: 80px;
+.space-before-body {
+  height: 65px;
 }
 
 /* navbar */
 .navbar {
   padding: 10px;
-  box-shadow: 0 0 5px #bbb;
   position: fixed;
   width: 100%;
-  /*background: #fff; YET ANOTHER TEST*/
   background: #0287c8;
-  z-index: 3;
-  height: 55px;
-}
-
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.logo {
-  width: 35px;
-  height: 35px;
-  float: left;
-  margin-left: 15px;
-}
-
-.user-img {
-  width: 35px;
-  height: 35px;
-  border-radius: 25px;
-  float: right;
-  margin-right: 20px;
+  z-index: 3000;
 }
 
 .navbar-left {
@@ -60,6 +33,27 @@ hr {
   float: right;
 }
 
+.logo {
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-left: 15px;
+}
+
+.navbar-user-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 25px;
+  float: right;
+  margin-right: 20px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .navbar ul li {
   display: inline-block;
   margin: 10px;
@@ -67,7 +61,6 @@ hr {
 
 .navbar ul li a,
 .navbar ul li span {
-  /*color: #0287c8;*/
   color: #fff;
   font-weight: bold;
   text-decoration: none;
@@ -76,9 +69,11 @@ hr {
 
 .navbar-dropdown {
   position: fixed;
+  z-index: 1000;
   top: 55px;
   right: 0;
-  border: 1px solid black;
+  background: #0287c8;
+  text-align: right;
   display: none;
 }
 
@@ -88,16 +83,20 @@ hr {
   list-style-type: none;
 }
 
-.navbar-dropdown ul li {
-  padding: 10px;
+.navbar-dropdown ul li,
+.navbar-dropdown ul li a {
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .navbar-dropdown ul li:hover {
-  background: #777;
+  background: #07549a;
 }
 
 
-/* flash messsage */
+/* flash messsages */
 .flash {
   position: fixed;
   z-index: 1000;
@@ -122,4 +121,97 @@ hr {
   background: #db3d3d;
   font-weight: bold;
   padding: 10px;
+}
+
+
+/* modals */
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 13px;
+  width: 40%;
+  margin: 200px auto 0;
+  animation-name: modalopen;
+  animation-duration: 0.7s;
+  box-shadow: 0 4px 6px 0 rgba(100, 100, 100, 0.4), 0 5px 15px 0;
+}
+
+@keyframes modalopen{
+  from{ opacity: 0}
+  to {opacity: 1}
+}
+
+.modal-header {
+  padding: 10px 0;
+}
+
+.modal-header h2 {
+  margin: 15px 10px 0;
+  font-size: 18px;
+  color: #0287c8;
+  display: inline-block;
+}
+
+.modal-close {
+  float: right;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 10px 15px;
+}
+
+.modal-close:hover {
+  color: #ad0909;
+  font-size: 24px;
+}
+
+.modal-body {
+  padding: 10px 10px 15px;
+}
+
+
+/* forms */
+.form {
+  text-align: center;
+}
+
+.form input {
+  width: 90%;
+  padding: 10px;
+  margin: 5px auto;
+  border: 1px solid #888;
+  border-radius: 13px;
+}
+
+.form input:focus {
+  outline: none;
+  border: 1px solid #0287c8;
+  box-shadow: 0 0 3px #0287c8;
+}
+
+.form button {
+  margin-top: 5px;
+  padding: 7px;
+  border: 2px solid #0287c8;
+  border-radius: 13px;
+  width: 200px;
+  color: #0287c8;
+  background: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.form button:hover {
+  color: #fff;
+  background: #0287c8;
 }

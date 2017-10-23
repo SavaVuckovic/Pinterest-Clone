@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
-    <!-- Bootstrap Grid -->
-    <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
     <!-- Custom CSS -->
@@ -20,28 +18,23 @@
     <nav class="navbar">
       <a href="/"><img src="/images/logo.png" class="logo" alt="logo"></a>
       <ul class="navbar-left">
-        <li><a href="#">Placeholder</a></li>
+        <li><a href="/">Pinterest</a></li>
       </ul>
       {% if user %}
-      <img class="user-img" src="{{ user.image }}" alt="user">
-      {% endif %}
+      <img class="navbar-user-img" src="{{user.image}}" alt="user">
+      {% else %}
       <ul class="navbar-right">
-        {% if not user %}
-          <li><span id="login-btn">Login</span></li>
-          <li><span id="register-btn">Register</span></li>
-        {% endif %}
+        <li><span id="login-btn">Login</span></li>
+        <li><span id="signup-btn">Sign Up</span></li>
       </ul>
+      {% endif %}
       <div class="clearfix"></div>
     </nav>
 
     {% if user %}
-    <!-- Navbar dropdown -->
     <div class="navbar-dropdown">
       <ul>
-        <li>dummy option</li>
-        <li>dummy option</li>
-        <li>dummy option</li>
-        <li>dummy option</li>
+        <li><a href="/{{user._id}}">Profile</a></li>
         <li><a href="/auth/logout">logout</a></li>
       </ul>
     </div>
@@ -49,36 +42,35 @@
 
     <!-- Flash messages -->
     {% if success_msg %}
-      <div class="flash flash-success">{{ success_msg }}</div>
+      <div class="flash flash-success">{{success_msg}}</div>
     {% endif %}
 
     {% if error_msg %}
       <div class="flash flash-error">{{error_msg}}</div>
     {% endif %}
 
+
     <!-- Page Body -->
+    <div class="space-before-body"></div>
     {% block body %}{% endblock %}
+
 
     <script>
       // Hide flash messages if their content is empty
-      // This is just a temporary workaround
       var success_msg = document.querySelector('.flash-success');
       var error_msg = document.querySelector('.flash-error');
-
       if(success_msg.innerHTML.length === 0) {
         success_msg.style.display = 'none';
       }
-
       if(error_msg.innerHTML.length === 0) {
         error_msg.style.display = 'none';
       }
-
     </script>
 
     {% if user %}
     <script>
-      // show dropdown on user icon hover
-      var userImg = document.querySelector('.user-img');
+      // show dropdown on user icon click
+      var userImg = document.querySelector('.navbar-user-img');
       var navDropdown = document.querySelector('.navbar-dropdown');
 
       userImg.addEventListener('click', toggleDropdown);
@@ -125,24 +117,24 @@
       </div>
     </div>
 
-    <!-- Register Modal -->
-    <div class="modal" id="register-modal">
+    <!-- SignUp Modal -->
+    <div class="modal" id="signup-modal">
       <div class="container">
         <div class="row justify-content-md-center">
           <div class="modal-content col-md-6">
 
             <div class="modal-header">
-              <h2>Register</h2>
-              <span class="modal-close" id="close-register">&times;</span>
+              <h2>Sign Up</h2>
+              <span class="modal-close" id="close-signup">&times;</span>
             </div>
             <hr>
             <div class="modal-body">
-              <form class="form" method="post" action="/auth/register">
+              <form class="form" method="post" action="/auth/signup">
                 <input type="text" name="username" placeholder="Username">
                 <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">
                 <input type="password" name="password2" placeholder="Confirm Password">
-                <button type="submit">Register</button>
+                <button type="submit">Sign Up</button>
               </form>
             </div>
 

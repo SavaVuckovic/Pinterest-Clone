@@ -1,20 +1,20 @@
 var loginBtn = document.querySelector('#login-btn');
-var registerBtn = document.querySelector('#register-btn');
+var signupBtn = document.querySelector('#signup-btn');
 var loginModal = document.querySelector('#login-modal');
-var registerModal = document.querySelector('#register-modal');
+var signupModal = document.querySelector('#signup-modal');
 var closeLoginBtn = document.querySelector('#close-login');
-var closeRegisterBtn = document.querySelector('#close-register');
+var closeSignupBtn = document.querySelector('#close-signup');
 
 // open login modal
 loginBtn.addEventListener('click', function() {
-  registerModal.style.display = 'none';
+  signupModal.style.display = 'none';
   loginModal.style.display = 'block';
 });
 
-// open register modal
-registerBtn.addEventListener('click', function() {
+// open signup modal
+signupBtn.addEventListener('click', function() {
   loginModal.style.display = 'none';
-  registerModal.style.display = 'block';
+  signupModal.style.display = 'block';
 });
 
 // close login modal
@@ -22,7 +22,7 @@ closeLoginBtn.addEventListener('click', function() {
   loginModal.style.display = 'none';
 });
 
-// close register modal
-closeRegisterBtn.addEventListener('click', function() {
-  registerModal.style.display = 'none';
+// close signup modal
+closeSignupBtn.addEventListener('click', function() {
+  signupModal.style.display = 'none';
 });

@@ -11,6 +11,7 @@ TODOS:
 - make pages mobile-responsive
 - add more visual details
 - access controlls
+- show error page for non existant pages
 - style, style, style
 - refactor, refactor, refactor
 - test, commenting code
