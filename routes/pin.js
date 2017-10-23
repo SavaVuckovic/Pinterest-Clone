@@ -5,9 +5,13 @@ const upload = require('../config/multer');
 
 // post pin (for creating a new pin)
 router.post('/add', requireAuth, (req, res) => {
+  // TEST
+  console.log('HEYY???')
+
   // uploading the pin image
   upload(req, res, (err) => {
     if(err){
+      console.log('WTFFF???')
       req.flash('error_msg', err);
       res.redirect('/home');
     } else {

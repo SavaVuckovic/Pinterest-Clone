@@ -34,7 +34,7 @@
     {% if user %}
     <div class="navbar-dropdown">
       <ul>
-        <li><a href="/{{user._id}}">Profile</a></li>
+        <li><a href="/{{user.username}}">Profile</a></li>
         <li><a href="/auth/logout">logout</a></li>
       </ul>
     </div>
@@ -69,10 +69,9 @@
 
     {% if user %}
     <script>
-      // show dropdown on user icon click
+      // show/hide dropdown on user icon click
       var userImg = document.querySelector('.navbar-user-img');
       var navDropdown = document.querySelector('.navbar-dropdown');
-
       userImg.addEventListener('click', toggleDropdown);
 
       function toggleDropdown() {
@@ -80,10 +79,8 @@
         console.log(navDropdown.style)
         if(navDropdown.style.display === 'block') {
           navDropdown.style.display = 'none';
-          console.log('this')
         } else if(navDropdown.style.display === '' || navDropdown.style.display === 'none') {
           navDropdown.style.display = 'block';
-          console.log('or')
         }
       }
     </script>

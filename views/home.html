@@ -6,6 +6,7 @@ Pinterest
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/css/pinterest-grid.css">
+<link rel="stylesheet" href="/css/home.css">
 {% endblock %}
 
 {% block body %}
@@ -40,32 +41,28 @@ Pinterest
         </div>
         <hr>
         <div class="modal-body">
+          <form class="new-pin-form" action="/pin/add" method="post" enctype="multipart/form-data">
 
-          <form class="form" action="/pin/add" method="post" enctype="multipart/form-data">
+            <label for="image">upload pin image</label>
+            <br>
+            <input id="file-upload" type="file" name="image">
 
+            <br>
+            <label for="body">say something about this pin</label>
             <textarea name="body" rows="8" cols="80"></textarea>
 
-            <hr>
-
-            Allow Comments?
+            <label for="allowComments">allow comments on this pin</label>
             <input type="checkbox" name="allowComments" checked>
 
-            <hr>
-
+            <br>
+            <label for="status">pin visibility status</label>
             <select name="status">
               <option value="private">Private</option>
               <option value="public" selected>Public</option>
             </select>
 
-            <hr>
-
-             Image
-            <input type="file" name="image">
-
             <button type="submit" name="submit">Add</button>
-
           </form>
-
         </div>
 
       </div>

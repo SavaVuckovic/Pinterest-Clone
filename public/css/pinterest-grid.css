@@ -1,4 +1,5 @@
 .pinterest-grid {
+  padding: 0 10px;
   margin: 0 auto;
   -moz-column-width: 220px;
 	-webkit-column-width: 220px;
@@ -25,29 +26,6 @@
   width: 100%;
 }
 
-.new-pin {
-  font-weight: bold;
-  text-align: center;
-  padding: 20px 10px 10px;
-  min-height: 200px;
-  background: #ddd;
-  border: 5px solid #fff;
-  border-radius: 15px;
-}
-
-.new-pin h1 {
-  font-size: 100px;
-}
-
-.new-pin h2 {
-  font-size: 22px;
-}
-
-.new-pin h1,
-.new-pin h2 {
-  color: #0287c8;
-}
-
 .overlay {
   position: absolute;
   top: 0;
@@ -58,7 +36,7 @@
   width: 100%;
   opacity: 0;
   transition: 0.5s ease;
-  background-color: rgba(17, 120, 214, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
@@ -82,14 +60,3 @@
 .pin:hover .overlay-link {
   display: inline;
 }
-
-
-
-
-
-
-/*
-.pin img:hover {
-  -webkit-filter: grayscale(100%);
-}
-*/

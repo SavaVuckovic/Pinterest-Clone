@@ -4,12 +4,10 @@ Pinterest clone built with NodeJS
 TODOS:
 
 - connect pages with links
-- style modal for adding pins
 - implement facebook OAuth (optional)
 - implement twitter OAuth
 - implement better error handling
 - make pages mobile-responsive
-- add more visual details
 - access controlls
 - show error page for non existant pages
 - style, style, style

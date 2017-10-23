@@ -6,6 +6,7 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 body * {
   font-family: 'Droid Sans', sans-serif;
   color: #222;
+  box-sizing: border-box;
 }
 
 .clearfix {
@@ -14,6 +15,10 @@ body * {
 
 .space-before-body {
   height: 65px;
+}
+
+.container {
+  padding: 10px;
 }
 
 /* navbar */
