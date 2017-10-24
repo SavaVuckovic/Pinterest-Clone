@@ -5,7 +5,6 @@ TODOS:
 
 - style
   - pin page
-  - user page
   - make all pages responsive
   - comment section
 
@@ -13,6 +12,7 @@ TODOS:
 - access controlls
 
 - implement twitter OAuth
+- allow users to update their profile info
 
 - implement better error handling ???
 - show error page for non existent pages

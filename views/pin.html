@@ -9,46 +9,48 @@ Pinterest
 {% endblock %}
 
 {% block body %}
-<div class="container">
-  <div class="single-pin">
+<div class="single-pin">
+  <img class="single-pin-image" src="/images/uploads/{{pin.image}}" alt="pin">
 
-    <h4>INFO</h4>
-    <hr>
-    <img src="/images/uploads/{{pin.image}}" alt="pin">
-    <hr>
-    <p>{{pin.body}}</p>
-    <p>{{pin.author}}</p>
-    <p>{{pin.date}}</p>
-    <p>{{pin.author.username}}</p>
-    <p>{{pin.author.email}}</p>
-    <img src="{{pin.author.image}}" alt="">
+  <div class="single-pin-author">
+    <img src="{{pin.author.image}}" alt="author">
+    <div class="author-info">
+      <a href="/{{pin.author.username}}">{{pin.author.username}}</a>
+      <span>{{createdAt}}</span>
+    </div>
+  </div>
 
-    {% if pin.allowComments %}
-      {% if user %}
-      <h2>Write a Comment</h2>
-      <form class="form" action="/pin/comment/{{pin.id}}" method="POST">
-        <textarea name="commentBody" rows="8" cols="80"></textarea>
-        <button type="submit">Add Comment</button>
-      </form>
-      {% else %}
-      <h2>Log in to write a comment</h2>
-      {% endif %}
+  <hr>
 
-      {% for comment in pin.comments %}
-        <hr>
-        <img src="{{comment.commentAuthor.image}}" alt="">
-        <h2>{{comment.commentBody}}</h2>
-        <h3>{{comment.commentDate}}</h3>
-        <hr>
-      {% endfor %}
+  <p>{{pin.body}}</p>
+
+  <hr>
+
+  {% if pin.allowComments %}
+    {% if user %}
+    <h2>Write a Comment</h2>
+    <form class="form" action="/pin/comment/{{pin.id}}" method="POST">
+      <textarea name="commentBody" rows="8" cols="80"></textarea>
+      <button type="submit">Add Comment</button>
+    </form>
+    {% else %}
+    <h2>Log in to write a comment</h2>
     {% endif %}
 
-    <hr>
+    {% for comment in pin.comments %}
+      <hr>
+      <img src="{{comment.commentAuthor.image}}" alt="">
+      <h2>{{comment.commentBody}}</h2>
+      <h3>{{comment.commentDate}}</h3>
+      <hr>
+    {% endfor %}
+  {% endif %}
 
-    <button id="edit-pin-btn">EDIT</button>
-    <button id="delete-pin-btn">DELETE</button>
+  <hr>
 
-  </div>
+  <button id="edit-pin-btn">EDIT</button>
+  <button id="delete-pin-btn">DELETE</button>
+
 </div>
 
 <!-- Edit Pin Modal -->

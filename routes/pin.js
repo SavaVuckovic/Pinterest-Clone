@@ -1,17 +1,14 @@
 const router = require('express').Router();
 const requireAuth = require('../helpers/requireAuth');
+const formatDate = require('../helpers/formatDate');
 const Pin = require('../models/pin');
 const upload = require('../config/multer');
 
 // post pin (for creating a new pin)
 router.post('/add', requireAuth, (req, res) => {
-  // TEST
-  console.log('HEYY???')
-
   // uploading the pin image
   upload(req, res, (err) => {
     if(err){
-      console.log('WTFFF???')
       req.flash('error_msg', err);
       res.redirect('/home');
     } else {
@@ -46,7 +43,10 @@ router.get('/:id', (req, res) => {
     .populate('comments.commentAuthor')
     .sort({ date: 'desc' })
     .then((pin) => {
-      res.render('pin', { pin })
+      // format pin date
+      const createdAt = formatDate(pin.date);
+      
+      res.render('pin', { pin, createdAt })
     })
 });
 

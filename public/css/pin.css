@@ -1,4 +1,46 @@
+body {
+  background: #eee;
+}
+
 .single-pin {
+  padding: 25px;
+  max-width: 900px;
+  border-radius: 13px;
+  background: #fff;
+  margin: 20px auto;
+}
+
+.single-pin-image {
+  width: 100%;
+  border-radius: 13px;
+}
+
+.single-pin-author {
   border: 1px solid black;
-  padding: 10px;
+  margin-top: 15px;
+  display: flex;
+}
+
+.single-pin-author img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.author-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.author-info a {
+  display: inline-block;
+  font-size: 24px;
+  color: #0088c4;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.author-info a:hover {
+  color: #00a2ef;
 }
