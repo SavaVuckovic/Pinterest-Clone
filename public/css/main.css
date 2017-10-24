@@ -14,7 +14,7 @@ body * {
 }
 
 .space-before-body {
-  height: 65px;
+  height: 50px;
 }
 
 .container {
@@ -102,9 +102,9 @@ body * {
   list-style-type: none;
 }
 
-.navbar-dropdown ul li,
 .navbar-dropdown ul li a {
-  padding: 10px 20px;
+  display: block;
+  padding: 15px 25px;
   color: #fff;
   font-weight: bold;
   text-decoration: none;
@@ -322,7 +322,7 @@ body * {
 
 @media screen and (max-width: 500px) {
   .space-before-body {
-    height: 55px;
+    height: 45px;
   }
 
   /* navbar */

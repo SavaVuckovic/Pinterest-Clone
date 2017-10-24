@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const requireAuth = require('../helpers/requireAuth');
+const formatDate = require('../helpers/formatDate');
 const Pin = require('../models/pin');
 const User = require('../models/user');
 
@@ -27,12 +28,15 @@ router.get('/home', requireAuth, (req, res) => {
 router.get('/:username', (req, res) => {
   User.findOne({ username: req.params.username })
     .then((user) => {
+      // format user date
+      const joinDate = formatDate(user.date);
+
       Pin.find({
         status: 'public',
         author: user._id
       })
       .then((pins) => {
-        res.render('user', { user, pins });
+        res.render('user', { user, pins, joinDate });
       })
     })
 });

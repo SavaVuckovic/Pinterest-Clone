@@ -12,7 +12,6 @@ TODOS:
 - refactor
 - access controlls
 
-- implement facebook OAuth (optional)
 - implement twitter OAuth
 
 - implement better error handling ???
