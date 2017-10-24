@@ -107,13 +107,19 @@ body * {
   z-index: 1000;
 }
 
+.flash-close {
+  color: red;
+  margin: 10px;
+}
+
 .flash-success {
   bottom: 0;
   left: 0;
   margin: 20px;
-  border: 1px solid #0a7027;
-  color: #0a7027;
-  background: #0c4f12;
+  border: 1px solid #0c4f12;
+  border-radius: 12px;
+  color: #0c4f12;
+  background: #fff;
   font-weight: bold;
   padding: 10px;
 }
@@ -126,6 +132,16 @@ body * {
   background: #db3d3d;
   font-weight: bold;
   padding: 10px;
+}
+
+.flash-info {
+  bottom: 0;
+  left: 0;
+  margin: 20px;
+  font-weight: bold;
+  padding: 10px;
+  color: #fff;
+  background: #252525;
 }
 
 
@@ -219,4 +235,65 @@ body * {
 .form button:hover {
   color: #fff;
   background: #0287c8;
+}
+
+
+.or {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.fa {
+  color: #fff;
+  margin-right: 10px;
+}
+
+#google-button {
+  margin: 10px auto;
+  display: block;
+  padding: 7px;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid #e54736;
+  border-radius: 13px;
+  width: 200px;
+  color: #fff;
+  background: #e54736;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#google-button:hover {
+  background: #fff;
+  color: #e54736;
+}
+
+#google-button:hover .fa-google {
+  color: #e54736;
+}
+
+#twitter-button {
+  margin: 10px auto;
+  display: block;
+  padding: 7px;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid #00a2ef;
+  border-radius: 13px;
+  width: 200px;
+  color: #fff;
+  background: #00a2ef;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#twitter-button:hover {
+  background: #fff;
+  color: #00a2ef;
+}
+
+#twitter-button:hover .fa-twitter {
+  color: #00a2ef;
 }

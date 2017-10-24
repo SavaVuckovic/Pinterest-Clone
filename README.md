@@ -3,15 +3,24 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- connect pages with links
+- style
+  - pin page
+  - user page
+  - make all pages responsive
+  - flash messages
+  - comment section
+  - login modal
+
+- refactor
+- access controlls
+
 - implement facebook OAuth (optional)
 - implement twitter OAuth
-- implement better error handling
-- make pages mobile-responsive
-- access controlls
-- show error page for non existant pages
-- style, style, style
-- refactor, refactor, refactor
-- test, commenting code
-- finishing touches, adding credits
+
+- implement better error handling ???
+- show error page for non existent pages
+
+- test everything, try to break the app
 - deploy to Heroku
+
+- write a README
