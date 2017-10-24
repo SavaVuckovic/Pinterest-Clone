@@ -9,7 +9,6 @@ TODOS:
   - make all pages responsive
   - flash messages
   - comment section
-  - login modal
 
 - refactor
 - access controlls

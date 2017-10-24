@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Pacifico" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
@@ -19,16 +19,19 @@
     <!-- Navbar -->
     <nav class="navbar">
       <a href="/"><img src="/images/logo.png" class="logo" alt="logo"></a>
-      <ul class="navbar-left">
-        <li><a href="/">Pinterest</a></li>
-      </ul>
+      <div class="navbar-left">
+        <a href="/" id="brand">Pinterest Clone</a>
+      </div>
       {% if user %}
-      <img class="navbar-user-img" src="{{user.image}}" alt="user">
+        <div class="navbar-right">
+          <div class="navbar-username">{{user.username}}</div>
+          <img class="navbar-user-img" src="{{user.image}}" alt="user">
+        </div>
       {% else %}
-      <ul class="navbar-right">
-        <li><span id="login-btn">Login</span></li>
-        <li><span id="signup-btn">Sign Up</span></li>
-      </ul>
+        <ul class="navbar-right">
+          <li><span id="login-btn">Login</span></li>
+          <li><span id="signup-btn">Sign Up</span></li>
+        </ul>
       {% endif %}
       <div class="clearfix"></div>
     </nav>
@@ -45,22 +48,15 @@
     <!-- Flash messages -->
     {% if success_msg %}
       <div class="flash flash-success">
-        {{success_msg}}
-        <i class="flash-close">$times;</i>
+        <div class="flash-success-text success-color">{{success_msg}}</div>
+        <i class="flash-close success-color">&times;</i>
       </div>
     {% endif %}
 
     {% if error_msg %}
       <div class="flash flash-error">
-        {{error_msg}}
-        <i class="flash-close">$times;</i>
-      </div>
-    {% endif %}
-
-    {% if info_msg %}
-      <div class="flash flash-info">
-        {{info_msg}}
-        <i class="flash-close">$times;</i>
+        <div class="flash-error-text error-color">{{error_msg}}</div>
+        <i class="flash-close error-color">&times;</i>
       </div>
     {% endif %}
 
@@ -72,16 +68,24 @@
 
     <script>
       // Hide flash messages if their content is empty
-      var success_msg = document.querySelector('.flash-success');
-      var error_msg = document.querySelector('.flash-error');
-      if(success_msg.innerHTML.length === 0) {
-        success_msg.style.display = 'none';
+      var successMsg = document.querySelector('.flash-success');
+      var errorMsg = document.querySelector('.flash-error');
+      var successMsgText = document.querySelector('.flash-success-text');
+      var errorMsgText = document.querySelector('.flash-error-text');
+      var flashClose = document.querySelector('.flash-close');
+
+      if(successMsgText.innerHTML.length === 0) {
+        successMsg.style.display = 'none';
       }
-      if(error_msg.innerHTML.length === 0) {
-        error_msg.style.display = 'none';
+      if(errorMsgText.innerHTML.length === 0) {
+        errorMsg.style.display = 'none';
       }
 
-
+      // Close flash messages
+      flashClose.addEventListener('click', function() {
+        successMsg.style.display = 'none';
+        errorMsg.style.display = 'none';
+      });
     </script>
 
     {% if user %}

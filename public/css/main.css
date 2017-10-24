@@ -38,11 +38,25 @@ body * {
   float: right;
 }
 
+#brand {
+  display: block;
+  font-family: 'Pacifico', cursive;
+  font-size: 22px;
+  margin-top: 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
 .logo {
-  width: 35px;
-  height: 35px;
-  float: left;
-  margin-left: 15px;
+  display: none;
+}
+
+.navbar-username {
+  margin: 10px 10px 0;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block;
 }
 
 .navbar-user-img {
@@ -105,44 +119,45 @@ body * {
 .flash {
   position: fixed;
   z-index: 1000;
+  bottom: 0;
+  left: 0;
+  margin: 20px;
 }
 
 .flash-close {
-  color: red;
+  display: inline-block;
   margin: 10px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .flash-success {
-  bottom: 0;
-  left: 0;
-  margin: 20px;
-  border: 1px solid #0c4f12;
+  border: 3px solid #0c4f12;
   border-radius: 12px;
-  color: #0c4f12;
   background: #fff;
-  font-weight: bold;
-  padding: 10px;
 }
 
 .flash-error {
-  top: 0;
-  margin: 20px;
-  border: 1px solid #700a0a;
-  color: #700a0a;
-  background: #db3d3d;
-  font-weight: bold;
-  padding: 10px;
+  border: 3px solid #700a0a;
+  border-radius: 12px;
+  background: #fff;
 }
 
-.flash-info {
-  bottom: 0;
-  left: 0;
-  margin: 20px;
+.flash-success-text,
+.flash-error-text {
   font-weight: bold;
-  padding: 10px;
-  color: #fff;
-  background: #252525;
+  margin: 10px;
+  display: inline-block;
 }
+
+.success-color {
+  color: #0c4f12;
+}
+
+.error-color {
+  color: #700a0a;
+}
+
 
 
 /* modals */
@@ -296,4 +311,36 @@ body * {
 
 #twitter-button:hover .fa-twitter {
   color: #00a2ef;
+}
+
+/* smaller screens */
+@media screen and (max-width: 500px) {
+  /* navbar */
+  .logo {
+    display: inline;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    float: left;
+  }
+
+  #brand {
+    display: none;
+  }
+
+  .navbar ul li {
+    margin: 5px;
+  }
+
+  .navbar ul li a,
+  .navbar ul li span {
+    color: $fff;
+    font-size: 14px;
+  }
+
+  .navbar-user-img {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+  }
 }
