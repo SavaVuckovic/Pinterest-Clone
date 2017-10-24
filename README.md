@@ -7,7 +7,6 @@ TODOS:
   - pin page
   - user page
   - make all pages responsive
-  - flash messages
   - comment section
 
 - refactor

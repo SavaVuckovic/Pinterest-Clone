@@ -12,7 +12,7 @@ Pinterest
 {% block body %}
 <div class="container-fluid body-wrapper">
   <div class="pinterest-grid">
-    <!-- New Pin -->
+
     <div class="pin new-pin">
       <h1>&plus;</h1>
       <h2>Create Pin</h2>
@@ -31,41 +31,30 @@ Pinterest
 
 <!-- New Pin Modal -->
 <div class="modal" id="new-pin-modal">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="modal-content col-md-6">
-
-        <div class="modal-header">
-          <h2>Create New Pin</h2>
-          <span class="modal-close" id="close-new-pin">&times;</span>
-        </div>
-        <hr>
-        <div class="modal-body">
-          <form class="new-pin-form" action="/pin/add" method="post" enctype="multipart/form-data">
-
-            <label for="image">upload pin image</label>
-            <br>
-            <input id="file-upload" type="file" name="image">
-
-            <br>
-            <label for="body">say something about this pin</label>
-            <textarea name="body" rows="8" cols="80"></textarea>
-
-            <label for="allowComments">allow comments on this pin</label>
-            <input type="checkbox" name="allowComments" checked>
-
-            <br>
-            <label for="status">pin visibility status</label>
-            <select name="status">
-              <option value="private">Private</option>
-              <option value="public" selected>Public</option>
-            </select>
-
-            <button type="submit" name="submit">Add</button>
-          </form>
-        </div>
-
-      </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Create New Pin</h2>
+      <span class="modal-close" id="close-new-pin">&times;</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <form class="new-pin-form" action="/pin/add" method="post" enctype="multipart/form-data">
+        <label for="image">upload pin image</label>
+        <br>
+        <input id="file-upload" type="file" name="image">
+        <br>
+        <label for="body">say something about this pin</label>
+        <textarea name="body" rows="8" cols="80"></textarea>
+        <label for="allowComments">allow comments on this pin</label>
+        <input type="checkbox" name="allowComments" checked>
+        <br>
+        <label for="status">pin visibility status</label>
+        <select name="status">
+          <option value="private">Private</option>
+          <option value="public" selected>Public</option>
+        </select>
+        <button type="submit" name="submit">Add</button>
+      </form>
     </div>
   </div>
 </div>

@@ -64,4 +64,56 @@
 
 #file-upload {
   border: none;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 480px) {
+  .new-pin {
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  .new-pin h1 {
+    font-size: 70px;
+  }
+
+  .new-pin h2 {
+    font-size: 18px;
+  }
+
+  .new-pin-form input{
+    padding: 5px;
+  }
+
+  .new-pin-form button {
+    margin: 10px auto 0;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .new-pin-form label {
+    font-size: 14px;
+    margin: 8px 0 5px;
+  }
+}
+
+@media screen and (max-width: 250px) {
+  .new-pin {
+    min-height: 90px;
+    padding: 5px;
+  }
+
+  .new-pin h1 {
+    font-size: 60px;
+  }
+
+  .new-pin h2 {
+    font-size: 16px;
+  }
+
+  #file-upload {
+    max-width: 190px;
+    font-size: 12px;
+  }
 }

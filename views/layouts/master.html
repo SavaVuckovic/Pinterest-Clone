@@ -107,56 +107,41 @@
     {% else %}
     <!-- Login Modal -->
     <div class="modal" id="login-modal">
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="modal-content col-md-6">
-
-            <div class="modal-header">
-              <h2>Log in</h2>
-              <span class="modal-close" id="close-login">&times;</span>
-            </div>
-            <hr>
-            <div class="modal-body">
-              <form class="form" method="post" action="/auth/login">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Password">
-                <button type="submit">Log in</button>
-              </form>
-
-
-              <div class="or">or</div>
-              <a href="/auth/google" id="google-button"><i class="fa fa-google" aria-hidden="true"></i>Log in with Google</a>
-              <a href="/auth/twitter" id="twitter-button"><i class="fa fa-twitter" aria-hidden="true"></i>Log in in with Twitter</a>
-
-            </div>
-
-          </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Log in</h2>
+          <span class="modal-close" id="close-login">&times;</span>
+        </div>
+        <hr>
+        <div class="modal-body">
+          <form class="form" method="post" action="/auth/login">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <button type="submit">Log in</button>
+          </form>
+          <div class="or">or</div>
+          <a href="/auth/google" id="google-button"><i class="fa fa-google" aria-hidden="true"></i>Log in with Google</a>
+          <a href="/auth/twitter" id="twitter-button"><i class="fa fa-twitter" aria-hidden="true"></i>Log in with Twitter</a>
         </div>
       </div>
     </div>
 
     <!-- SignUp Modal -->
     <div class="modal" id="signup-modal">
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="modal-content col-md-6">
-
-            <div class="modal-header">
-              <h2>Sign Up</h2>
-              <span class="modal-close" id="close-signup">&times;</span>
-            </div>
-            <hr>
-            <div class="modal-body">
-              <form class="form" method="post" action="/auth/signup">
-                <input type="text" name="username" placeholder="Username">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Password">
-                <input type="password" name="password2" placeholder="Confirm Password">
-                <button type="submit">Sign Up</button>
-              </form>
-            </div>
-
-          </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Sign Up</h2>
+          <span class="modal-close" id="close-signup">&times;</span>
+        </div>
+        <hr>
+        <div class="modal-body">
+          <form class="form" method="post" action="/auth/signup">
+            <input type="text" name="username" placeholder="Username">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password2" placeholder="Confirm Password">
+            <button type="submit">Sign Up</button>
+          </form>
         </div>
       </div>
     </div>

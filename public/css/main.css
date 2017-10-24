@@ -168,7 +168,6 @@ body * {
   top: 0;
   height: 100%;
   width: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.5);
   display: none;
 }
@@ -314,7 +313,18 @@ body * {
 }
 
 /* smaller screens */
+@media screen and (max-width: 650px) {
+  .modal-content {
+    width: 70%;
+    margin-top: 65px;
+  }
+}
+
 @media screen and (max-width: 500px) {
+  .space-before-body {
+    height: 55px;
+  }
+
   /* navbar */
   .logo {
     display: inline;
@@ -342,5 +352,42 @@ body * {
     width: 30px;
     height: 30px;
     margin: 0;
+  }
+
+  .navbar-dropdown {
+    top: 40px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* modals */
+  .modal-content {
+    width: 90%;
+  }
+
+  .modal-header {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .modal-content {
+    padding: 0;
+  }
+
+  .modal-body {
+    padding: 5px 5px 10px;
+  }
+
+  .form button,
+  #google-button,
+  #twitter-button {
+    width: 140px;
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .form input {
+    padding: 5px;
   }
 }

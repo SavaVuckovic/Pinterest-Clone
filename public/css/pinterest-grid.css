@@ -60,3 +60,14 @@
 .pin:hover .overlay-link {
   display: inline;
 }
+
+/* smaller screens */
+@media screen and (max-width: 750px) {
+  .pinterest-grid {
+    padding: 0 5px;
+  }
+
+  .pin {
+    margin: 0;
+  }
+}
