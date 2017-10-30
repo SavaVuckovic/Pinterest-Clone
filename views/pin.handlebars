@@ -1,5 +1,4 @@
 
-
 {{#section 'styles'}}
 <link rel="stylesheet" href="/css/pin.css">
 {{/section}}
@@ -11,106 +10,88 @@
     <a href="/{{pin.author.username}}"><img src="{{pin.author.image}}" alt="author"></a>
     <div class="author-info">
       <a href="/{{pin.author.username}}">{{pin.author.username}}</a>
-      <span>{{createdAt}}</span>
+      <span>{{formatDate pin.date}}</span>
     </div>
 
-    
-    <div class="edit-delete">
-      <button id="edit-pin-btn">edit</button>
-      <button id="delete-pin-btn">delete</button>
-    </div>
-
+    {{{editOrDelete pin.author.id loggedUser.id}}}
   </div>
 
-  <hr>
+  <div class="pin-body">
+    <p>{{pin.body}}</p>
+  </div>
 
-  <p>{{pin.body}}</p>
+  {{#if pin.allowComments}}
+    {{#if loggedUser}}
 
-  <hr>
-
-  {% if pin.allowComments %}
-    {% if user %}
     <h2>Write a Comment</h2>
     <form class="form" action="/pin/comment/{{pin.id}}" method="POST">
       <textarea name="commentBody" rows="8" cols="80"></textarea>
       <button type="submit">Add Comment</button>
     </form>
-    {% else %}
-    <h2>Log in to write a comment</h2>
-    {% endif %}
 
-    {% if pin.comments %}
+    {{else}}
+
+    <div id="open-login">Log in to write a comment</div>
+
+    {{/if}}
+
+    {{#if pin.comments}}
       <div class="comment-section">
-      {% for comment in pin.comments %}
+      {{#each pin.comments}}
 
-        <img src="{{comment.commentAuthor.image}}" alt="">
-        <h2>{{comment.commentBody}}</h2>
-        <h3>{{comment.commentDate}}</h3>
+        <img src="{{this.commentAuthor.image}}" alt="">
+        <h2>{{this.commentBody}}</h2>
+        <h3>{{this.commentDate}}</h3>
         <hr>
 
-      {% else %}
-      NO COMMENT Xd
-      {% endfor %}
+      {{/each}}
       </div>
-    {% endif %}
+    {{/if}}
 
-  {% endif %}
+  {{/if}}
 </div>
 
-<!-- TEST -->
-
-{{#if verifyAccess 1 1}}
-TRUE
-{{/if}}
 
 <!-- Edit Pin Modal -->
 <div class="modal" id="edit-pin-modal">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="modal-content col-md-6">
-        <div class="modal-header">
-          <h2>Edit Pin</h2>
-          <span class="modal-close" id="close-edit-pin">&times;</span>
-        </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Edit Pin</h2>
+      <span class="modal-close" id="close-edit-pin">&times;</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <form class="form" id="edit-form" action="/pin/edit/{{pin._id}}?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
         <hr>
-        <div class="modal-body">
-          <form class="form" id="edit-form" action="/pin/edit/{{pin._id}}?_method=PUT" method="POST">
-            <input type="hidden" name="_method" value="PUT">
-            <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
-            <hr>
-            Allow Comments?
-            <input type="checkbox" name="allowComments" checked>
-            <hr>
-            <select name="status">
-              <option value="private">Private</option>
-              <option value="public" selected>Public</option>
-            </select>
-            <hr>
-            <button type="submit" name="submit">Update</button>
-          </form>
-        </div>
-      </div>
+        Allow Comments?
+        <input type="checkbox" name="allowComments" checked>
+        <hr>
+        <select name="status">
+          <option value="private">Private</option>
+          <option value="public" selected>Public</option>
+        </select>
+        <hr>
+        <button type="submit" name="submit">Update</button>
+      </form>
     </div>
   </div>
 </div>
 
 <!-- Delete Pin Modal -->
 <div class="modal" id="delete-pin-modal">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="modal-content col-md-6">
-        <div class="modal-header">
-          <h2>Delete Pin</h2>
-          <span class="modal-close" id="close-delete-pin">&times;</span>
-        </div>
-        <hr>
-        <div class="modal-body">
-          <form class="form" id="edit-form" action="/pin/delete/{{pin._id}}?_method=DELETE" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" name="submit">Delete</button>
-          </form>
-        </div>
-      </div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Delete Pin</h2>
+      <span class="modal-close" id="close-delete-pin">&times;</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <form class="form" id="edit-form" action="/pin/delete/{{pin._id}}?_method=DELETE" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" name="submit">Delete</button>
+      </form>
     </div>
   </div>
 </div>

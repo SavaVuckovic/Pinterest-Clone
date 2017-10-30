@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const requireAuth = require('../helpers/requireAuth');
-const formatDate = require('../helpers/formatDate');
 const Pin = require('../models/pin');
 const upload = require('../config/multer');
 
@@ -43,10 +42,7 @@ router.get('/:id', (req, res) => {
     .populate('comments.commentAuthor')
     .sort({ date: 'desc' })
     .then((pin) => {
-      // format pin date
-      const createdAt = formatDate(pin.date);
-
-      res.render('pin', { pin, createdAt })
+      res.render('pin', { pin })
     });
 });
 

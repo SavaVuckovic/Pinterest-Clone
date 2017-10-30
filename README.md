@@ -3,22 +3,13 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- switch to handlebars
-
 - style
   - pin page
   - make all pages responsive
   - comment section
-  - flash messages responsive
   - edit & delete modals
 
-- refactor (HTML(handlebars), CSS)
-  - load proper files
-  - use proper classes and ids
-  - only some should use IDs
-  - organize css better, remove unnecessary things?
-
-- access controlls
+- add/ delete/ edit comments
 
 - implement twitter OAuth
 - allow users to update their profile info

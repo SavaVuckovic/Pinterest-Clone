@@ -11,7 +11,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const multer = require('multer');
 const methodOverride = require('method-override');
-const { section, verifyAccess } = require('./helpers/handlebars');
+const { section, editOrDelete, formatDate } = require('./helpers/handlebars');
 const keys = require('./config/keys');
 
 // database connection
@@ -38,7 +38,7 @@ app.use(methodOverride('_method'));
 // view engine setup
 app.engine('handlebars', exphbs({
   defaultLayout: 'master',
-  helpers: { section, verifyAccess }
+  helpers: { section, editOrDelete, formatDate }
 }));
 app.set('view engine', 'handlebars');
 

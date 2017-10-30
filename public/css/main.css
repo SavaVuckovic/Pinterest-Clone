@@ -17,10 +17,6 @@ body * {
   height: 50px;
 }
 
-.container {
-  padding: 10px;
-}
-
 /* navbar */
 .navbar {
   padding: 10px;
@@ -126,6 +122,7 @@ body * {
 
 .flash-close {
   display: inline-block;
+  float: right;
   margin: 10px;
   font-size: 22px;
   font-weight: bold;
@@ -146,8 +143,9 @@ body * {
 .flash-success-text,
 .flash-error-text {
   font-weight: bold;
-  margin: 10px;
+  margin: 13px 10px 10px;
   display: inline-block;
+  font-size: 16px;
 }
 
 .success-color {
@@ -157,7 +155,6 @@ body * {
 .error-color {
   color: #700a0a;
 }
-
 
 
 /* modals */
@@ -332,6 +329,7 @@ body * {
     width: 30px;
     height: 30px;
     float: left;
+    border-radius: none;
   }
 
   #brand {
@@ -358,6 +356,21 @@ body * {
     top: 40px;
     width: 100%;
     text-align: center;
+  }
+
+  /* flash messages */
+  .flash {
+    margin: 5px;
+    padding: 5px;
+    font-size: 14px;
+    width: 95%;
+    border-width: 1px;
+    border-radius: none;
+  }
+
+  .flash-close {
+    margin: 5px;
+    float: right;
   }
 
   /* modals */
