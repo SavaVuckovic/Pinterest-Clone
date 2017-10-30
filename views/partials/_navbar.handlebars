@@ -3,10 +3,10 @@
   <div class="navbar-left">
     <a href="/" id="brand">Pinterest Clone</a>
   </div>
-  {{#if user}}
+  {{#if loggedUser}}
     <div class="navbar-right">
-      <div class="navbar-username">{{user.username}}</div>
-      <img class="navbar-user-img" src="{{user.image}}" alt="user">
+      <div class="navbar-username">{{loggedUser.username}}</div>
+      <img class="navbar-user-img" src="{{loggedUser.image}}" alt="user">
     </div>
   {{else}}
     <ul class="navbar-right">
@@ -17,10 +17,10 @@
   <div class="clearfix"></div>
 </nav>
 
-{{#if user}}
+{{#if loggedUser}}
 <div class="navbar-dropdown">
   <ul>
-    <li><a href="/{{user.username}}">Profile</a></li>
+    <li><a href="/{{loggedUser.username}}">Profile</a></li>
     <li><a href="/auth/logout">logout</a></li>
   </ul>
 </div>

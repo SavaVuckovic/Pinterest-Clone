@@ -12,7 +12,12 @@ TODOS:
   - flash messages responsive
   - edit & delete modals
 
-- refactor
+- refactor (HTML(handlebars), CSS)
+  - load proper files
+  - use proper classes and ids
+  - only some should use IDs
+  - organize css better, remove unnecessary things?
+
 - access controlls
 
 - implement twitter OAuth

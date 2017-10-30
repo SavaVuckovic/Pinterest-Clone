@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pinterest</title>
+    <title>{{{_sections.title}}}</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Pacifico" rel="stylesheet">
     <!-- Font Awesome -->
@@ -28,19 +28,21 @@
 
 
     <script>
-      // Hide flash messages if their content is empty
+      // hide flash messages if their content is empty
       var successMsg = document.querySelector('.flash-success');
       var errorMsg = document.querySelector('.flash-error');
       var flashClose = document.querySelector('.flash-close');
 
-      // Close flash messages
-      flashClose.addEventListener('click', function() {
-        successMsg.style.display = 'none';
-        errorMsg.style.display = 'none';
-      });
+      // closing flash messages
+      if(flashClose) {
+        flashClose.addEventListener('click', function() {
+          successMsg.style.display = 'none';
+          errorMsg.style.display = 'none';
+        });
+      }
     </script>
 
-    {{#if user}}
+    {{#if loggedUser}}
     <script>
       // show/hide dropdown on user icon click
       var userImg = document.querySelector('.navbar-user-img');

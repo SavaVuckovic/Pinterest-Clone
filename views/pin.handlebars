@@ -1,14 +1,9 @@
-{% extends 'layouts/master.html' %}
 
-{% block title %}
-Pinterest
-{% endblock %}
 
-{% block stylesheets %}
+{{#section 'styles'}}
 <link rel="stylesheet" href="/css/pin.css">
-{% endblock %}
+{{/section}}
 
-{% block body %}
 <div class="single-pin">
   <img class="single-pin-image" src="/images/uploads/{{pin.image}}" alt="pin">
 
@@ -19,12 +14,12 @@ Pinterest
       <span>{{createdAt}}</span>
     </div>
 
-    {% if ownPost %}
+    
     <div class="edit-delete">
       <button id="edit-pin-btn">edit</button>
       <button id="delete-pin-btn">delete</button>
     </div>
-    {% endif %}
+
   </div>
 
   <hr>
@@ -62,40 +57,23 @@ Pinterest
   {% endif %}
 </div>
 
-<!-- test -->
-{% if 3 === 3 %}
-TRUE 333
-{% endif %}
+<!-- TEST -->
 
-{% if pin._id %}
-{{pin._id}}
-{% endif %}
-
-{% if pin.author._id %}
-{{pin._id}}
-{% endif %}
-
-<br>
-
-{% if user %}
-  {% if user._id === pin.author._id %}
-  YESSSSSSSSSSSSSSSSSSS
-  {% endif %}
-{% endif %}
+{{#if verifyAccess 1 1}}
+TRUE
+{{/if}}
 
 <!-- Edit Pin Modal -->
 <div class="modal" id="edit-pin-modal">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="modal-content col-md-6">
-
         <div class="modal-header">
           <h2>Edit Pin</h2>
           <span class="modal-close" id="close-edit-pin">&times;</span>
         </div>
         <hr>
         <div class="modal-body">
-
           <form class="form" id="edit-form" action="/pin/edit/{{pin._id}}?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
             <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
@@ -110,9 +88,7 @@ TRUE 333
             <hr>
             <button type="submit" name="submit">Update</button>
           </form>
-
         </div>
-
       </div>
     </div>
   </div>
@@ -123,29 +99,22 @@ TRUE 333
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="modal-content col-md-6">
-
         <div class="modal-header">
           <h2>Delete Pin</h2>
           <span class="modal-close" id="close-delete-pin">&times;</span>
         </div>
         <hr>
         <div class="modal-body">
-
           <form class="form" id="edit-form" action="/pin/delete/{{pin._id}}?_method=DELETE" method="POST">
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" name="submit">Delete</button>
           </form>
-
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-{% if ownPost %}
+
 <!-- Modals Script -->
 <script src="/js/edit_delete_modals.js"></script>
-{% endif %}
-
-{% endblock %}

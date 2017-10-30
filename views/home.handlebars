@@ -1,32 +1,23 @@
-{% extends 'layouts/master.html' %}
 
-{% block title %}
-Pinterest
-{% endblock %}
-
-{% block stylesheets %}
+{{#section 'styles'}}
 <link rel="stylesheet" href="/css/pinterest-grid.css">
 <link rel="stylesheet" href="/css/home.css">
-{% endblock %}
+{{/section}}
 
-{% block body %}
-<div class="container-fluid body-wrapper">
-  <div class="pinterest-grid">
 
-    <div class="pin new-pin">
-      <h1>&plus;</h1>
-      <h2>Create Pin</h2>
-    </div>
-
-    {% for pin in pins %}
-    <div class="pin">
-      <img src="/images/uploads/{{pin.image}}" alt="">
-      <div class="overlay">
-        <a href="/pin/{{pin._id}}" class="overlay-link">More</a>
-      </div>
-    </div>
-    {% endfor %}
+<div class="pinterest-grid">
+  <div class="pin new-pin">
+    <h1>&plus;</h1>
+    <h2>Create Pin</h2>
   </div>
+  {{#each pins}}
+  <div class="pin">
+    <img src="/images/uploads/{{this.image}}" alt="">
+    <div class="overlay">
+      <a href="/pin/{{this._id}}" class="overlay-link">More</a>
+    </div>
+  </div>
+  {{/each}}
 </div>
 
 <!-- New Pin Modal -->
@@ -61,4 +52,3 @@ Pinterest
 
 <!-- Modals Script -->
 <script src="/js/home_modals.js"></script>
-{% endblock %}

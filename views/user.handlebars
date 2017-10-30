@@ -1,41 +1,39 @@
-{% extends 'layouts/master.html' %}
 
-{% block title %}
+{{#section 'title'}}
 {{user.username}}
-{% endblock %}
+{{/section}}
 
-{% block stylesheets %}
+{{#section 'styles'}}
 <link rel="stylesheet" href="/css/user.css">
 <link rel="stylesheet" href="/css/pinterest-grid.css">
-{% endblock %}
+{{/section}}
 
-{% block body %}
-  <!-- User -->
-  <div class="user-field">
-    <div class="user-field-left">
-      <img id="user-avatar" src="{{user.image}}" alt="user">
+
+<!-- User -->
+<div class="user-field">
+  <div class="user-field-left">
+    <img id="user-avatar" src="{{user.image}}" alt="user">
+  </div>
+  <div class="user-field-right">
+    <div class="user-info">
+      <h1>{{user.username}}</h1>
+      <div class="joined">Joined: {{joinDate}}</div>
     </div>
-    <div class="user-field-right">
-      <div class="user-info">
-        <h1>{{user.username}}</h1>
-        <div class="joined">Joined: {{joinDate}}</div>
-      </div>
-      <ul>
-        <li>Pins</li>
-        <li>About</li>
-      </ul>
+    <ul>
+      <li>Pins</li>
+      <li>About</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Pins by user -->
+<div class="pinterest-grid">
+  {{#each pins}}
+  <div class="pin">
+    <img src="/images/uploads/{{this.image}}" alt="">
+    <div class="overlay">
+      <a href="/pin/{{this._id}}" class="overlay-link">More</a>
     </div>
   </div>
-
-  <!-- Pins by user -->
-  <div class="pinterest-grid">
-    {% for pin in pins %}
-    <div class="pin">
-      <img src="/images/uploads/{{pin.image}}" alt="">
-      <div class="overlay">
-        <a href="/pin/{{pin._id}}" class="overlay-link">More</a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-{% endblock %}
+  {{/each}}
+</div>
