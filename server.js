@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
-const nunjucks = require('nunjucks');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
@@ -11,6 +11,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const multer = require('multer');
 const methodOverride = require('method-override');
+const { section } = require('./helpers/handlebars');
 const keys = require('./config/keys');
 
 // database connection
@@ -35,11 +36,13 @@ const pinRoutes = require('./routes/pin');
 app.use(methodOverride('_method'));
 
 // view engine setup
-app.set('view engine', 'html');
-nunjucks.configure(path.join(__dirname, 'views'), {
-  autoescape: true,
-  express: app
-});
+app.engine('handlebars', exphbs({
+  defaultLayout: 'master',
+  helpers: {
+    section
+  }
+}));
+app.set('view engine', 'handlebars');
 
 // serve favicon
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))

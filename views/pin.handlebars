@@ -12,12 +12,19 @@ Pinterest
 <div class="single-pin">
   <img class="single-pin-image" src="/images/uploads/{{pin.image}}" alt="pin">
 
-  <div class="single-pin-author">
-    <img src="{{pin.author.image}}" alt="author">
+  <div class="single-pin-info">
+    <a href="/{{pin.author.username}}"><img src="{{pin.author.image}}" alt="author"></a>
     <div class="author-info">
       <a href="/{{pin.author.username}}">{{pin.author.username}}</a>
       <span>{{createdAt}}</span>
     </div>
+
+    {% if ownPost %}
+    <div class="edit-delete">
+      <button id="edit-pin-btn">edit</button>
+      <button id="delete-pin-btn">delete</button>
+    </div>
+    {% endif %}
   </div>
 
   <hr>
@@ -37,21 +44,44 @@ Pinterest
     <h2>Log in to write a comment</h2>
     {% endif %}
 
-    {% for comment in pin.comments %}
-      <hr>
-      <img src="{{comment.commentAuthor.image}}" alt="">
-      <h2>{{comment.commentBody}}</h2>
-      <h3>{{comment.commentDate}}</h3>
-      <hr>
-    {% endfor %}
+    {% if pin.comments %}
+      <div class="comment-section">
+      {% for comment in pin.comments %}
+
+        <img src="{{comment.commentAuthor.image}}" alt="">
+        <h2>{{comment.commentBody}}</h2>
+        <h3>{{comment.commentDate}}</h3>
+        <hr>
+
+      {% else %}
+      NO COMMENT Xd
+      {% endfor %}
+      </div>
+    {% endif %}
+
   {% endif %}
-
-  <hr>
-
-  <button id="edit-pin-btn">EDIT</button>
-  <button id="delete-pin-btn">DELETE</button>
-
 </div>
+
+<!-- test -->
+{% if 3 === 3 %}
+TRUE 333
+{% endif %}
+
+{% if pin._id %}
+{{pin._id}}
+{% endif %}
+
+{% if pin.author._id %}
+{{pin._id}}
+{% endif %}
+
+<br>
+
+{% if user %}
+  {% if user._id === pin.author._id %}
+  YESSSSSSSSSSSSSSSSSSS
+  {% endif %}
+{% endif %}
 
 <!-- Edit Pin Modal -->
 <div class="modal" id="edit-pin-modal">
@@ -113,8 +143,9 @@ Pinterest
   </div>
 </div>
 
-
+{% if ownPost %}
 <!-- Modals Script -->
 <script src="/js/edit_delete_modals.js"></script>
+{% endif %}
 
 {% endblock %}

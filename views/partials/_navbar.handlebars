@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <a href="/"><img src="/images/logo.png" class="logo" alt="logo"></a>
+  <div class="navbar-left">
+    <a href="/" id="brand">Pinterest Clone</a>
+  </div>
+  {{#if user}}
+    <div class="navbar-right">
+      <div class="navbar-username">{{user.username}}</div>
+      <img class="navbar-user-img" src="{{user.image}}" alt="user">
+    </div>
+  {{else}}
+    <ul class="navbar-right">
+      <li><span id="login-btn">Login</span></li>
+      <li><span id="signup-btn">Sign Up</span></li>
+    </ul>
+  {{/if}}
+  <div class="clearfix"></div>
+</nav>
+
+{{#if user}}
+<div class="navbar-dropdown">
+  <ul>
+    <li><a href="/{{user.username}}">Profile</a></li>
+    <li><a href="/auth/logout">logout</a></li>
+  </ul>
+</div>
+{{/if}}

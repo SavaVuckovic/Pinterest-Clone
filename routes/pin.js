@@ -45,9 +45,9 @@ router.get('/:id', (req, res) => {
     .then((pin) => {
       // format pin date
       const createdAt = formatDate(pin.date);
-      
+
       res.render('pin', { pin, createdAt })
-    })
+    });
 });
 
 // put pin (for updating pins)

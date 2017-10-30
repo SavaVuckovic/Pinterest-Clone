@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Pinterest</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Pacifico" rel="stylesheet">
     <!-- Font Awesome -->
@@ -12,74 +12,26 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <!-- Additional Page-Specific CSS -->
-    {% block stylesheets %}{% endblock %}
+    {{{_sections.styles}}}
   </head>
   <body>
 
     <!-- Navbar -->
-    <nav class="navbar">
-      <a href="/"><img src="/images/logo.png" class="logo" alt="logo"></a>
-      <div class="navbar-left">
-        <a href="/" id="brand">Pinterest Clone</a>
-      </div>
-      {% if user %}
-        <div class="navbar-right">
-          <div class="navbar-username">{{user.username}}</div>
-          <img class="navbar-user-img" src="{{user.image}}" alt="user">
-        </div>
-      {% else %}
-        <ul class="navbar-right">
-          <li><span id="login-btn">Login</span></li>
-          <li><span id="signup-btn">Sign Up</span></li>
-        </ul>
-      {% endif %}
-      <div class="clearfix"></div>
-    </nav>
-
-    {% if user %}
-    <div class="navbar-dropdown">
-      <ul>
-        <li><a href="/{{user.username}}">Profile</a></li>
-        <li><a href="/auth/logout">logout</a></li>
-      </ul>
-    </div>
-    {% endif %}
+    {{> _navbar}}
 
     <!-- Flash messages -->
-    {% if success_msg %}
-      <div class="flash flash-success">
-        <div class="flash-success-text success-color">{{success_msg}}</div>
-        <i class="flash-close success-color">&times;</i>
-      </div>
-    {% endif %}
-
-    {% if error_msg %}
-      <div class="flash flash-error">
-        <div class="flash-error-text error-color">{{error_msg}}</div>
-        <i class="flash-close error-color">&times;</i>
-      </div>
-    {% endif %}
-
+    {{> _flash}}
 
     <!-- Page Body -->
     <div class="space-before-body"></div>
-    {% block body %}{% endblock %}
+    {{{body}}}
 
 
     <script>
       // Hide flash messages if their content is empty
       var successMsg = document.querySelector('.flash-success');
       var errorMsg = document.querySelector('.flash-error');
-      var successMsgText = document.querySelector('.flash-success-text');
-      var errorMsgText = document.querySelector('.flash-error-text');
       var flashClose = document.querySelector('.flash-close');
-
-      if(successMsgText.innerHTML.length === 0) {
-        successMsg.style.display = 'none';
-      }
-      if(errorMsgText.innerHTML.length === 0) {
-        errorMsg.style.display = 'none';
-      }
 
       // Close flash messages
       flashClose.addEventListener('click', function() {
@@ -88,7 +40,7 @@
       });
     </script>
 
-    {% if user %}
+    {{#if user}}
     <script>
       // show/hide dropdown on user icon click
       var userImg = document.querySelector('.navbar-user-img');
@@ -104,7 +56,7 @@
       }
     </script>
 
-    {% else %}
+    {{else}}
     <!-- Login Modal -->
     <div class="modal" id="login-modal">
       <div class="modal-content">
@@ -147,7 +99,7 @@
     </div>
 
     <script src="/js/auth_modals.js"></script>
-    {% endif %}
+    {{/if}}
 
   </body>
 </html>

@@ -3,10 +3,14 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
+- switch to handlebars
+
 - style
   - pin page
   - make all pages responsive
   - comment section
+  - flash messages responsive
+  - edit & delete modals
 
 - refactor
 - access controlls
