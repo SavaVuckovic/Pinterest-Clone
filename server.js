@@ -81,6 +81,12 @@ app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/pin', pinRoutes);
 
+// handle 404
+app.use((req, res) => {
+  res.status(404);
+  res.render('error', { title: '404: Page Not Found' });
+});
+
 // start the server
 const PORT = process.env.PORT || 4444;
 app.listen(PORT, () => console.log(`Application running on port ${ PORT }`));
