@@ -31,7 +31,9 @@ closeSignupBtn.addEventListener('click', function() {
 var pinLoginBtn = document.querySelector('#open-login');
 
 // open login modal
-pinLoginBtn.addEventListener('click', function() {
-  signupModal.style.display = 'none';
-  loginModal.style.display = 'block';
-});
+if(pinLoginBtn) {
+  pinLoginBtn.addEventListener('click', function() {
+    signupModal.style.display = 'none';
+    loginModal.style.display = 'block';
+  });
+}

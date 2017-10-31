@@ -4,9 +4,6 @@ Pinterest clone built with NodeJS
 TODOS:
 
 - style
-
-  - comment section
-
   - edit & delete modals
 
 - add/ delete/ edit comments

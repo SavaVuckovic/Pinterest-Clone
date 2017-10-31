@@ -36,8 +36,11 @@
       // closing flash messages
       if(flashClose) {
         flashClose.addEventListener('click', function() {
-          successMsg.style.display = 'none';
-          errorMsg.style.display = 'none';
+          if (successMsg) {
+            successMsg.style.display = 'none';
+          } else if(errorMsg) {
+            errorMsg.style.display = 'none';
+          }
         });
       }
     </script>
