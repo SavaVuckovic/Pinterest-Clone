@@ -26,3 +26,12 @@ closeLoginBtn.addEventListener('click', function() {
 closeSignupBtn.addEventListener('click', function() {
   signupModal.style.display = 'none';
 });
+
+// if user tries to log in from single pin page
+var pinLoginBtn = document.querySelector('#open-login');
+
+// open login modal
+pinLoginBtn.addEventListener('click', function() {
+  signupModal.style.display = 'none';
+  loginModal.style.display = 'block';
+});

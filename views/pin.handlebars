@@ -23,16 +23,13 @@
   {{#if pin.allowComments}}
     {{#if loggedUser}}
 
-    <h2>Write a Comment</h2>
-    <form class="form" action="/pin/comment/{{pin.id}}" method="POST">
-      <textarea name="commentBody" rows="8" cols="80"></textarea>
+    <form id="comment-form" class="form" action="/pin/comment/{{pin.id}}" method="POST">
+      <textarea name="commentBody" placeholder="Write a comment"></textarea>
       <button type="submit">Add Comment</button>
     </form>
 
     {{else}}
-
-    <div id="open-login">Log in to write a comment</div>
-
+      <div id="open-login">Log in to write a comment</div>
     {{/if}}
 
     {{#if pin.comments}}

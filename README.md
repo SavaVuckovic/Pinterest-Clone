@@ -5,7 +5,6 @@ TODOS:
 
 - style
 
-  - pin page
   - comment section
 
   - edit & delete modals
