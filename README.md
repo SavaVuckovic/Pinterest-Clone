@@ -3,11 +3,7 @@ Pinterest clone built with NodeJS
 
 TODOS:
 
-- comments create and delete
-
 - implement twitter OAuth
-
-- allow users to update their profile info
 
 - improve logic for CRUD
 

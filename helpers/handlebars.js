@@ -30,6 +30,8 @@ module.exports = {
       <form id="delete-comment-form" action="/pin/${pinID}/comment/delete?_method=DELETE" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="deleteID" value="${deleteID}">
+        <input type="hidden" name="commentAuthorID" value="${commentAuthorID}">
+        <input type="hidden" name="loggedUserID" value="${loggedUserID}">
         <button type="submit">delete</button>
       </form>`;
     } else {

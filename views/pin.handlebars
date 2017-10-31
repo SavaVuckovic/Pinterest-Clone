@@ -15,6 +15,9 @@
     <div class="modal-body">
       <form class="form" id="edit-pin-form" action="/pin/edit/{{pin._id}}?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="pinAuthorID" value="{{pin.author.id}}">
+        <input type="hidden" name="loggedUserID" value="{{loggedUser.id}}">
+
         <label for="body">edit pin description</label>
         <textarea name="body" rows="8" cols="80">{{pin.body}}</textarea>
         <br>
@@ -44,6 +47,9 @@
     <div class="modal-body">
       <form class="form" id="delete-pin-form" action="/pin/delete/{{pin._id}}?_method=DELETE" method="POST">
         <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="pinAuthorID" value="{{pin.author.id}}">
+        <input type="hidden" name="loggedUserID" value="{{loggedUser.id}}">
+
         <button type="submit" name="submit">Delete</button>
       </form>
     </div>

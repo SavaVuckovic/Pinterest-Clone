@@ -31,7 +31,8 @@ const PinSchema = new mongoose.Schema({
     commentAuthor: {
       // related to users from another collection
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'users'
+      ref: 'users',
+      required: true
     },
     commentDate: {
       type: Date,
