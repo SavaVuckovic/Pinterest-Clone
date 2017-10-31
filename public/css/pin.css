@@ -131,7 +131,12 @@ body {
 }
 
 .comment p {
+  padding: 5px;
   margin-left: 10px;
+}
+
+#delete-comment-form {
+  border: 1px solid black;
 }
 
 /* edit and delete modals and inner forms */

@@ -12,7 +12,8 @@ module.exports = {
       <div class="edit-delete">
         <button id="edit-pin-btn">edit</button>
         <button id="delete-pin-btn">delete</button>
-      </div>`;
+      </div>
+      <script src="/js/edit_delete_modals.js"></script>`;
     } else {
       return '';
     }
@@ -21,5 +22,18 @@ module.exports = {
   formatDate(dateFromMongo) {
     const formattedDate = dateFromMongo.toString().slice(4, 16);
     return formattedDate;
+  },
+  // checks if user has permissions to edit/delete comments
+  deleteComment(commentAuthorID, loggedUserID, pinID, deleteID) {
+    if(commentAuthorID == loggedUserID) {
+      return `
+      <form id="delete-comment-form" action="/pin/${pinID}/comment/delete?_method=DELETE" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="deleteID" value="${deleteID}">
+        <button type="submit">delete</button>
+      </form>`;
+    } else {
+      return '';
+    }
   }
 }

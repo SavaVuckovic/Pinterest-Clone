@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
     .populate('comments.commentAuthor')
     .sort({ date: 'desc' })
     .then((pin) => {
-      res.render('pin', { pin })
+      res.render('pin', { pin });
     });
 });
 
@@ -58,9 +58,9 @@ router.put('/edit/:id', requireAuth, (req, res) => {
       pin.save()
         .then((pin) => {
           req.flash('success_msg', 'Pin Edited');
-          res.redirect('/home');
-        })
-    })
+          res.redirect(`/pin/${req.params.id}`);
+        });
+    });
 });
 
 // delete pin
@@ -76,22 +76,36 @@ router.delete('/delete/:id', requireAuth, (req, res) => {
 
 
 // post a comment
-router.post('/comment/:id', (req, res) => {
-  // NEEDS TO BE IMPROVED
+router.post('/:id/comment/add', requireAuth, (req, res) => {
   Pin.findOne({ _id: req.params.id })
     .then((pin) => {
       const newComment = {
         commentBody: req.body.commentBody,
         commentAuthor: req.user.id,
       }
-
       pin.comments.unshift(newComment);
       pin.save()
         .then((pin) => {
           req.flash('Comment Added');
           res.redirect(`/pin/${pin.id}`);
-        })
-    })
+        });
+    });
+});
+
+// delete a comment
+router.delete('/:id/comment/delete', requireAuth, (req, res) => {
+  Pin.findOne({ _id: req.params.id })
+    .then((pin) => {
+      pin.comments = pin.comments.filter((comment) => {
+        return comment.id !== req.body.deleteID;
+      });
+
+      pin.save()
+        .then((pin) => {
+          req.flash('Comment Deleted');
+          res.redirect(`/pin/${pin.id}`);
+        });
+    });
 });
 
 module.exports = router;

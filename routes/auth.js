@@ -13,7 +13,7 @@ router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/'
 }), (req, res) => {
   // Authentication successful
-  req.flash('success_msg', 'Hi, nice to see you!');
+  req.flash('success_msg', 'Welcome to Pinterest Clone!');
   res.redirect('/home');
 });
 
@@ -42,7 +42,7 @@ router.post('/signup', [
         .then((user) => {
           if(user) {
             // return error if user exists
-            req.flash('error_msg', 'User already exists');
+            req.flash('error_msg', 'User with this information already exists');
             res.redirect('/');
           } else {
             // hash the password and save the user in the database
@@ -61,7 +61,7 @@ router.post('/signup', [
                   if(err) {
                     return next(err);
                   }
-                  req.flash('success_msg', 'Registration successful!');
+                  req.flash('success_msg', 'Registration successful, you can now log in!');
                   res.redirect('/');
                 });
               });
@@ -78,7 +78,7 @@ router.post('/login', (req, res, next) => {
     if (err) { return next(err); }
     // if invalid username or password
     if (!user) {
-      req.flash('error_msg', 'Invalid username or password');
+      req.flash('error_msg', 'Invalid username or password.');
       return res.redirect('/');
     }
 
@@ -93,7 +93,7 @@ router.post('/login', (req, res, next) => {
 // logout
 router.get('/logout', (req, res) => {
   req.logout();
-  req.flash('success_msg', 'Logged out, thanks for stopping by!');
+  req.flash('success_msg', 'Thanks for stopping by!');
   res.redirect('/');
 });
 

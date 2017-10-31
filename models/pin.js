@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // pin schema
 const PinSchema = new mongoose.Schema({
   author: {
+    // related to users from another collection
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   },
