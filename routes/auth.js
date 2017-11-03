@@ -17,6 +17,19 @@ router.get('/google/callback', passport.authenticate('google', {
   res.redirect('/home');
 });
 
+// twitter
+router.get('/twitter', passport.authenticate('twitter'));
+
+// twitter callback
+router.get('/twitter/callback', passport.authenticate('twitter', {
+  failureRedirect: '/'
+}), (req, res) => {
+  // Authentication successful
+  req.flash('success_msg', 'Welcome to Pinterest Clone!');
+  res.redirect('/home');
+});
+
+
 // signup
 router.post('/signup', [
     // validate form values

@@ -5,6 +5,7 @@ const keys = require('./keys');
 // strategies
 const localStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 
 module.exports = function(passport) {
@@ -69,6 +70,21 @@ module.exports = function(passport) {
       }
     })
   }));
+
+  // twitter strategy
+  passport.use(new TwitterStrategy({
+    consumerKey: keys.twitterConsumerKey,
+    consumerSecret: keys.twitterConsumerSecret,
+    callbackURL: "/auth/twitter/callback"
+  },
+  (token, tokenSecret, profile, done) => {
+    const newUser = new User ({
+      twitterID: profile.id,
+      username: profile.displayName,
+      image: profile.photos[0].value
+    }).save().then((user) => done(null, user));
+  }
+  ));
 
   // serialize
   passport.serializeUser((user_id, done) => {
