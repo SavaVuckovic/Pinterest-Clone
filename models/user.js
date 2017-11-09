@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true
   },
+  twitterID: {
+    type: String,
+    unique: true
+  },
   image: {
     type: String
   },
